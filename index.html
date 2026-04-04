@@ -6,6 +6,13 @@
   <title>FightGrowth — The AI Revenue Agent for Combat Sports Gyms</title>
   <meta name="description" content="Stop losing leads. FightGrowth automatically follows up, converts, and retains members for martial arts gyms and combat sports coaches." />
   <script async src="https://tally.so/widgets/embed.js"></script>
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "w6ir9eokmi");
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -18,7 +25,6 @@
       --red-dim: #9e1c14;
       --white: #f5f0eb;
       --gray: #1a1a1a;
-      --gray-mid: #2a2a2a;
       --gray-light: #888;
       --accent: #f5c842;
     }
@@ -34,7 +40,6 @@
       overflow-x: hidden;
     }
 
-    /* ── NOISE OVERLAY ── */
     body::before {
       content: '';
       position: fixed;
@@ -45,784 +50,352 @@
       opacity: 0.4;
     }
 
-    /* ── NAV ── */
+    /* NAV */
     nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
       padding: 20px 48px;
       background: rgba(10,10,10,0.85);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(255,255,255,0.06);
     }
-
     .nav-logo {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 28px;
-      letter-spacing: 2px;
-      color: var(--white);
-      text-decoration: none;
+      font-family: 'Bebas Neue', sans-serif; font-size: 28px;
+      letter-spacing: 2px; color: var(--white); text-decoration: none;
     }
-
     .nav-logo span { color: var(--red); }
-
     .nav-cta {
-      background: var(--red);
-      color: var(--white);
-      font-family: 'DM Mono', monospace;
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      padding: 10px 24px;
-      border: none;
-      cursor: pointer;
-      text-decoration: none;
+      background: var(--red); color: var(--white);
+      font-family: 'DM Mono', monospace; font-size: 13px;
+      font-weight: 500; letter-spacing: 1px; text-transform: uppercase;
+      padding: 10px 24px; border: none; cursor: pointer;
       transition: background 0.2s, transform 0.15s;
     }
-
     .nav-cta:hover { background: #ff3329; transform: translateY(-1px); }
 
-    /* ── HERO ── */
+    /* HERO */
     .hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 140px 48px 80px;
-      position: relative;
-      overflow: hidden;
+      min-height: 100vh; display: flex; flex-direction: column;
+      justify-content: center; padding: 140px 48px 80px;
+      position: relative; overflow: hidden;
     }
-
     .hero-bg {
-      position: absolute;
-      inset: 0;
+      position: absolute; inset: 0;
       background:
         radial-gradient(ellipse 60% 50% at 80% 50%, rgba(232,40,30,0.12) 0%, transparent 70%),
         radial-gradient(ellipse 40% 60% at 10% 80%, rgba(232,40,30,0.06) 0%, transparent 60%);
     }
-
     .hero-tag {
-      font-family: 'DM Mono', monospace;
-      font-size: 12px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--red);
-      margin-bottom: 24px;
-      opacity: 0;
+      font-family: 'DM Mono', monospace; font-size: 12px;
+      letter-spacing: 3px; text-transform: uppercase; color: var(--red);
+      margin-bottom: 24px; opacity: 0;
       animation: fadeUp 0.6s ease forwards 0.2s;
     }
-
     .hero h1 {
       font-family: 'Bebas Neue', sans-serif;
       font-size: clamp(64px, 10vw, 140px);
-      line-height: 0.92;
-      letter-spacing: 2px;
-      max-width: 900px;
-      opacity: 0;
-      animation: fadeUp 0.7s ease forwards 0.35s;
+      line-height: 0.92; letter-spacing: 2px; max-width: 900px;
+      opacity: 0; animation: fadeUp 0.7s ease forwards 0.35s;
     }
-
-    .hero h1 em {
-      font-style: normal;
-      color: var(--red);
-      display: block;
-    }
-
+    .hero h1 em { font-style: normal; color: var(--red); display: block; }
     .hero-sub {
-      font-size: 18px;
-      font-weight: 300;
-      color: rgba(245,240,235,0.65);
-      max-width: 540px;
-      margin-top: 28px;
-      line-height: 1.7;
-      opacity: 0;
-      animation: fadeUp 0.7s ease forwards 0.5s;
+      font-size: 18px; font-weight: 300;
+      color: rgba(245,240,235,0.65); max-width: 540px;
+      margin-top: 28px; line-height: 1.7;
+      opacity: 0; animation: fadeUp 0.7s ease forwards 0.5s;
     }
-
     .hero-sub strong { color: var(--white); font-weight: 500; }
 
-    /* ── STAT BAR ── */
+    /* STAT BAR */
     .stat-bar {
-      display: flex;
-      gap: 0;
-      margin-top: 60px;
+      display: flex; margin-top: 60px;
       border: 1px solid rgba(255,255,255,0.1);
-      opacity: 0;
-      animation: fadeUp 0.7s ease forwards 0.65s;
+      opacity: 0; animation: fadeUp 0.7s ease forwards 0.65s;
       max-width: 720px;
     }
-
-    .stat {
-      flex: 1;
-      padding: 24px 28px;
-      border-right: 1px solid rgba(255,255,255,0.1);
-    }
-
+    .stat { flex: 1; padding: 24px 28px; border-right: 1px solid rgba(255,255,255,0.1); }
     .stat:last-child { border-right: none; }
+    .stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 42px; color: var(--red); line-height: 1; }
+    .stat-label { font-size: 12px; color: var(--gray-light); margin-top: 4px; }
 
-    .stat-num {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 42px;
-      color: var(--red);
-      line-height: 1;
+    /* WAITLIST */
+    .waitlist-section { margin-top: 52px; opacity: 0; animation: fadeUp 0.7s ease forwards 0.8s; }
+    .waitlist-note { font-size: 12px; color: var(--gray-light); margin-top: 14px; }
+
+    /* TALLY BUTTON */
+    .btn-tally {
+      display: inline-block; background: var(--red); color: var(--white);
+      font-family: 'DM Mono', monospace; font-size: 14px;
+      font-weight: 500; letter-spacing: 1px; text-transform: uppercase;
+      padding: 16px 40px; border: none; cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
     }
+    .btn-tally:hover { background: #ff3329; transform: translateY(-1px); }
 
-    .stat-label {
-      font-size: 12px;
-      color: var(--gray-light);
-      margin-top: 4px;
-      font-weight: 400;
-      letter-spacing: 0.5px;
-    }
-
-    /* ── WAITLIST ── */
-    .waitlist-section {
-      margin-top: 52px;
-      opacity: 0;
-      animation: fadeUp 0.7s ease forwards 0.8s;
-    }
-
-    .waitlist-form {
-      display: flex;
-      gap: 0;
-      max-width: 480px;
-    }
-
-    .waitlist-input {
-      flex: 1;
-      background: var(--gray);
-      border: 1px solid rgba(255,255,255,0.12);
-      border-right: none;
-      color: var(--white);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 15px;
-      padding: 14px 20px;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-
-    .waitlist-input::placeholder { color: var(--gray-light); }
-    .waitlist-input:focus { border-color: var(--red); }
-
-    .waitlist-btn {
-      background: var(--red);
-      color: var(--white);
-      font-family: 'DM Mono', monospace;
-      font-size: 13px;
-      font-weight: 500;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      padding: 14px 28px;
-      border: none;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: background 0.2s;
-    }
-
-    .waitlist-btn:hover { background: #ff3329; }
-
-    .waitlist-note {
-      font-size: 12px;
-      color: var(--gray-light);
-      margin-top: 10px;
-    }
-
-    /* ── SECTION BASE ── */
-    section {
-      padding: 100px 48px;
-    }
-
+    /* SECTIONS */
+    section { padding: 100px 48px; }
     .section-tag {
-      font-family: 'DM Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--red);
-      margin-bottom: 16px;
+      font-family: 'DM Mono', monospace; font-size: 11px;
+      letter-spacing: 3px; text-transform: uppercase;
+      color: var(--red); margin-bottom: 16px;
     }
-
     .section-title {
       font-family: 'Bebas Neue', sans-serif;
       font-size: clamp(42px, 6vw, 80px);
-      line-height: 0.95;
-      letter-spacing: 1px;
-      max-width: 700px;
+      line-height: 0.95; letter-spacing: 1px; max-width: 700px;
     }
 
-    /* ── PROBLEM SECTION ── */
+    /* PROBLEM */
     .problem {
       background: var(--gray);
       border-top: 1px solid rgba(255,255,255,0.06);
       border-bottom: 1px solid rgba(255,255,255,0.06);
     }
-
     .problem-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      margin-top: 60px;
-      align-items: start;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; margin-top: 60px; align-items: start;
     }
-
     .problem-statement {
-      font-size: 22px;
-      font-weight: 300;
-      line-height: 1.7;
-      color: rgba(245,240,235,0.75);
+      font-size: 20px; font-weight: 300;
+      line-height: 1.8; color: rgba(245,240,235,0.75);
     }
-
-    .problem-statement strong {
-      color: var(--white);
-      font-weight: 600;
-    }
-
+    .problem-statement strong { color: var(--white); font-weight: 600; }
     .problem-math {
       background: var(--black);
-      border: 1px solid rgba(255,255,255,0.08);
-      padding: 36px;
+      border: 1px solid rgba(255,255,255,0.08); padding: 36px;
     }
-
     .math-title {
-      font-family: 'DM Mono', monospace;
-      font-size: 11px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--gray-light);
-      margin-bottom: 24px;
+      font-family: 'DM Mono', monospace; font-size: 11px;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--gray-light); margin-bottom: 24px;
     }
-
     .math-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      font-size: 14px;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 14px;
     }
-
     .math-row:last-child { border-bottom: none; }
     .math-row .label { color: var(--gray-light); }
     .math-row .value { font-family: 'DM Mono', monospace; color: var(--white); }
     .math-row.highlight .value { color: var(--red); font-size: 18px; }
     .math-row.highlight .label { color: var(--white); font-weight: 500; }
 
-    /* ── HOW IT WORKS ── */
+    /* HOW IT WORKS */
     .how-it-works { max-width: 1100px; margin: 0 auto; }
-
     .steps {
-      margin-top: 64px;
-      display: grid;
+      margin-top: 64px; display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
-      background: rgba(255,255,255,0.06);
+      gap: 2px; background: rgba(255,255,255,0.06);
     }
-
     .step {
-      background: var(--black);
-      padding: 48px 36px;
-      position: relative;
-      overflow: hidden;
-      transition: background 0.3s;
+      background: var(--black); padding: 48px 36px;
+      position: relative; overflow: hidden; transition: background 0.3s;
     }
-
     .step:hover { background: var(--gray); }
-
     .step::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: var(--red);
-      transform: scaleX(0);
-      transform-origin: left;
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--red); transform: scaleX(0); transform-origin: left;
       transition: transform 0.4s ease;
     }
-
     .step:hover::before { transform: scaleX(1); }
-
     .step-num {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 72px;
-      color: rgba(255,255,255,0.05);
-      line-height: 1;
-      margin-bottom: 20px;
+      font-family: 'Bebas Neue', sans-serif; font-size: 72px;
+      color: rgba(255,255,255,0.05); line-height: 1; margin-bottom: 20px;
     }
-
+    .step-icon { font-size: 32px; margin-bottom: 16px; }
     .step-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 28px;
-      letter-spacing: 1px;
-      margin-bottom: 14px;
-      color: var(--white);
+      font-family: 'Bebas Neue', sans-serif; font-size: 28px;
+      letter-spacing: 1px; margin-bottom: 14px;
     }
+    .step-desc { font-size: 14px; color: var(--gray-light); line-height: 1.7; }
 
-    .step-desc {
-      font-size: 14px;
-      color: var(--gray-light);
-      line-height: 1.7;
-    }
-
-    .step-icon {
-      font-size: 32px;
-      margin-bottom: 16px;
-    }
-
-    /* ── FIGHT CARD DASHBOARD ── */
+    /* DASHBOARD */
     .dashboard-section {
       background: var(--gray);
       border-top: 1px solid rgba(255,255,255,0.06);
     }
-
     .dashboard-wrap {
-      max-width: 1100px;
-      margin: 64px auto 0;
-      display: grid;
-      grid-template-columns: 1fr 1.4fr;
-      gap: 60px;
-      align-items: center;
+      max-width: 1100px; margin: 64px auto 0;
+      display: grid; grid-template-columns: 1fr 1.4fr;
+      gap: 60px; align-items: center;
     }
-
-    .dashboard-copy .section-title { max-width: 100%; }
-
     .dashboard-copy p {
-      margin-top: 24px;
-      font-size: 16px;
-      color: rgba(245,240,235,0.65);
-      line-height: 1.8;
+      margin-top: 24px; font-size: 16px;
+      color: rgba(245,240,235,0.65); line-height: 1.8;
     }
-
     .dashboard-copy ul {
-      margin-top: 28px;
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
+      margin-top: 28px; list-style: none;
+      display: flex; flex-direction: column; gap: 12px;
     }
-
     .dashboard-copy ul li {
-      font-size: 14px;
-      color: rgba(245,240,235,0.75);
-      display: flex;
-      align-items: center;
-      gap: 12px;
+      font-size: 14px; color: rgba(245,240,235,0.75);
+      display: flex; align-items: center; gap: 12px;
     }
-
     .dashboard-copy ul li::before {
-      content: '→';
-      color: var(--red);
-      font-family: 'DM Mono', monospace;
-      flex-shrink: 0;
+      content: '\2192'; color: var(--red);
+      font-family: 'DM Mono', monospace; flex-shrink: 0;
     }
 
-    /* ── MOCK DASHBOARD ── */
+    /* FIGHT CARD MOCK */
     .fight-card {
       background: var(--black);
       border: 1px solid rgba(255,255,255,0.1);
-      font-family: 'DM Mono', monospace;
-      font-size: 12px;
-      overflow: hidden;
+      font-family: 'DM Mono', monospace; font-size: 12px; overflow: hidden;
     }
-
     .fc-header {
-      background: var(--red);
-      padding: 14px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      background: var(--red); padding: 14px 20px;
+      display: flex; justify-content: space-between; align-items: center;
     }
-
-    .fc-title {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 18px;
-      letter-spacing: 2px;
-    }
-
-    .fc-live {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 10px;
-      letter-spacing: 2px;
-    }
-
+    .fc-title { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 2px; }
+    .fc-live { display: flex; align-items: center; gap: 6px; font-size: 10px; letter-spacing: 2px; }
     .fc-live-dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--accent);
-      animation: pulse 1.5s ease infinite;
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent); animation: pulse 1.5s ease infinite;
     }
-
     .fc-body { padding: 20px; }
-
-    .fc-section {
-      margin-bottom: 18px;
-    }
-
+    .fc-section { margin-bottom: 18px; }
     .fc-section-label {
-      font-size: 10px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+      margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
     }
-
     .fc-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 8px 12px;
-      background: rgba(255,255,255,0.03);
-      margin-bottom: 3px;
-      border-left: 2px solid transparent;
-      transition: border-color 0.2s;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 8px 12px; background: rgba(255,255,255,0.03);
+      margin-bottom: 3px; border-left: 2px solid transparent; transition: border-color 0.2s;
     }
-
     .fc-row:hover { border-left-color: var(--red); background: rgba(255,255,255,0.06); }
-
     .fc-row-name { color: var(--white); font-size: 11px; }
     .fc-row-status { font-size: 10px; }
-
     .status-hot { color: #ff6b6b; }
     .status-warm { color: var(--accent); }
     .status-closed { color: #6bffb8; }
-    .status-cold { color: var(--gray-light); }
-
     .fc-metrics {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
-      margin-top: 16px;
-      background: rgba(255,255,255,0.06);
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 2px; margin-top: 16px; background: rgba(255,255,255,0.06);
     }
-
-    .fc-metric {
-      background: var(--black);
-      padding: 14px 12px;
-      text-align: center;
-    }
-
+    .fc-metric { background: var(--black); padding: 14px 12px; text-align: center; }
     .fc-metric-num {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 28px;
-      color: var(--red);
-      line-height: 1;
+      font-family: 'Bebas Neue', sans-serif; font-size: 28px;
+      color: var(--red); line-height: 1;
     }
+    .fc-metric-label { font-size: 9px; color: var(--gray-light); letter-spacing: 1px; margin-top: 3px; }
 
-    .fc-metric-label {
-      font-size: 9px;
-      color: var(--gray-light);
-      letter-spacing: 1px;
-      margin-top: 3px;
-    }
-
-    /* ── PRICING ── */
+    /* PRICING */
     .pricing { max-width: 1000px; margin: 0 auto; }
-
     .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
-      margin-top: 60px;
-      background: rgba(255,255,255,0.06);
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 2px; margin-top: 60px; background: rgba(255,255,255,0.06);
     }
-
-    .plan {
-      background: var(--black);
-      padding: 44px 36px;
-      position: relative;
-      transition: background 0.2s;
-    }
-
+    .plan { background: var(--black); padding: 44px 36px; transition: background 0.2s; }
     .plan:hover { background: var(--gray); }
-
-    .plan.featured {
-      background: var(--red);
-    }
-
+    .plan.featured { background: var(--red); }
     .plan.featured:hover { background: #f03028; }
-
     .plan-badge {
-      font-family: 'DM Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 20px;
+      font-family: 'DM Mono', monospace; font-size: 10px;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 20px;
     }
-
     .plan.featured .plan-badge { color: rgba(255,255,255,0.7); }
-
-    .plan-name {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 36px;
-      letter-spacing: 1px;
-      margin-bottom: 8px;
-    }
-
-    .plan-price {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 64px;
-      line-height: 1;
-      color: var(--white);
-    }
-
-    .plan-price sup {
-      font-size: 24px;
-      vertical-align: top;
-      margin-top: 12px;
-      display: inline-block;
-    }
-
-    .plan-period {
-      font-size: 13px;
-      color: rgba(245,240,235,0.5);
-      margin-bottom: 32px;
-    }
-
+    .plan-name { font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 1px; margin-bottom: 8px; }
+    .plan-price { font-family: 'Bebas Neue', sans-serif; font-size: 64px; line-height: 1; }
+    .plan-price sup { font-size: 24px; vertical-align: top; margin-top: 12px; display: inline-block; }
+    .plan-period { font-size: 13px; color: rgba(245,240,235,0.5); margin-bottom: 32px; }
     .plan.featured .plan-period { color: rgba(255,255,255,0.6); }
-
-    .plan-features {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-bottom: 36px;
-    }
-
+    .plan-features { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 36px; }
     .plan-features li {
-      font-size: 13px;
-      color: rgba(245,240,235,0.7);
-      display: flex;
-      gap: 10px;
-      align-items: flex-start;
-      line-height: 1.5;
+      font-size: 13px; color: rgba(245,240,235,0.7);
+      display: flex; gap: 10px; align-items: flex-start; line-height: 1.5;
     }
-
     .plan.featured .plan-features li { color: rgba(255,255,255,0.85); }
-
-    .plan-features li::before {
-      content: '✓';
-      color: var(--accent);
-      flex-shrink: 0;
-      font-weight: 600;
-    }
-
+    .plan-features li::before { content: '\2713'; color: var(--accent); flex-shrink: 0; font-weight: 600; }
     .plan-cta {
-      display: block;
-      text-align: center;
-      padding: 14px;
-      border: 1px solid rgba(255,255,255,0.2);
-      color: var(--white);
-      text-decoration: none;
-      font-family: 'DM Mono', monospace;
-      font-size: 12px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      transition: all 0.2s;
-      cursor: pointer;
-      background: none;
-      width: 100%;
+      display: block; width: 100%; text-align: center; padding: 14px;
+      border: 1px solid rgba(255,255,255,0.2); color: var(--white);
+      font-family: 'DM Mono', monospace; font-size: 12px;
+      letter-spacing: 1px; text-transform: uppercase;
+      cursor: pointer; background: none; transition: all 0.2s;
     }
-
-    .plan-cta:hover {
-      background: rgba(255,255,255,0.1);
-      border-color: rgba(255,255,255,0.4);
-    }
-
-    .plan.featured .plan-cta {
-      background: var(--black);
-      border-color: var(--black);
-      color: var(--white);
-    }
-
+    .plan-cta:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.4); }
+    .plan.featured .plan-cta { background: var(--black); border-color: var(--black); }
     .plan.featured .plan-cta:hover { background: var(--gray); }
 
-    /* ── TESTIMONIALS ── */
+    /* TESTIMONIALS */
     .testimonials {
       background: var(--gray);
       border-top: 1px solid rgba(255,255,255,0.06);
     }
-
     .testimonial-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
-      margin-top: 60px;
-      background: rgba(255,255,255,0.06);
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 2px; margin-top: 60px; background: rgba(255,255,255,0.06);
     }
-
-    .testimonial {
-      background: var(--black);
-      padding: 40px 32px;
-    }
-
+    .testimonial { background: var(--black); padding: 40px 32px; }
     .testimonial-text {
-      font-size: 15px;
-      line-height: 1.75;
-      color: rgba(245,240,235,0.8);
-      font-style: italic;
-      margin-bottom: 24px;
+      font-size: 15px; line-height: 1.75;
+      color: rgba(245,240,235,0.8); font-style: italic; margin-bottom: 24px;
     }
-
-    .testimonial-author {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
+    .testimonial-author { display: flex; align-items: center; gap: 14px; }
     .author-avatar {
-      width: 40px; height: 40px;
-      border-radius: 50%;
-      background: var(--red-dim);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 18px;
-      color: var(--white);
-      flex-shrink: 0;
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--red-dim); display: flex; align-items: center;
+      justify-content: center; font-family: 'Bebas Neue', sans-serif;
+      font-size: 18px; color: var(--white); flex-shrink: 0;
     }
+    .author-name { font-size: 13px; font-weight: 600; color: var(--white); }
+    .author-title { font-size: 12px; color: var(--gray-light); margin-top: 2px; }
 
-    .author-name {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--white);
-    }
-
-    .author-title {
-      font-size: 12px;
-      color: var(--gray-light);
-      margin-top: 2px;
-    }
-
-    /* ── FINAL CTA ── */
+    /* FINAL CTA */
     .final-cta {
-      text-align: center;
-      padding: 120px 48px;
-      position: relative;
-      overflow: hidden;
+      text-align: center; padding: 120px 48px;
+      position: relative; overflow: hidden;
     }
-
     .final-cta::before {
-      content: '';
-      position: absolute;
-      inset: 0;
+      content: ''; position: absolute; inset: 0;
       background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(232,40,30,0.15) 0%, transparent 70%);
     }
-
     .final-cta h2 {
       font-family: 'Bebas Neue', sans-serif;
       font-size: clamp(52px, 8vw, 110px);
-      line-height: 0.92;
-      letter-spacing: 2px;
-      position: relative;
+      line-height: 0.92; letter-spacing: 2px; position: relative;
     }
+    .final-cta h2 em { font-style: normal; color: var(--red); display: block; }
+    .final-cta p { font-size: 17px; color: rgba(245,240,235,0.55); margin-top: 24px; position: relative; }
+    .final-cta-btn { margin-top: 44px; position: relative; }
 
-    .final-cta h2 em {
-      font-style: normal;
-      color: var(--red);
-      display: block;
-    }
-
-    .final-cta p {
-      font-size: 17px;
-      color: rgba(245,240,235,0.55);
-      margin-top: 24px;
-      position: relative;
-    }
-
-    .final-form {
-      display: flex;
-      gap: 0;
-      max-width: 440px;
-      margin: 44px auto 0;
-      position: relative;
-    }
-
-    /* ── FOOTER ── */
+    /* FOOTER */
     footer {
-      padding: 32px 48px;
-      border-top: 1px solid rgba(255,255,255,0.06);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      padding: 32px 48px; border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex; justify-content: space-between; align-items: center;
     }
-
-    .footer-logo {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 22px;
-      letter-spacing: 2px;
-      color: var(--white);
-    }
-
+    .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; }
     .footer-logo span { color: var(--red); }
-
-    .footer-copy {
-      font-size: 12px;
-      color: var(--gray-light);
-    }
-
-    .footer-email {
-      font-size: 12px;
-      color: var(--gray-light);
-      text-decoration: none;
-    }
-
+    .footer-copy { font-size: 12px; color: var(--gray-light); }
+    .footer-email { font-size: 12px; color: var(--gray-light); text-decoration: none; }
     .footer-email:hover { color: var(--white); }
 
-    /* ── ANIMATIONS ── */
+    /* ANIMATIONS */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(24px); }
       to { opacity: 1; transform: translateY(0); }
     }
-
     @keyframes pulse {
       0%, 100% { opacity: 1; transform: scale(1); }
       50% { opacity: 0.5; transform: scale(0.8); }
     }
-
-    /* Scroll-triggered reveal */
     .reveal {
-      opacity: 0;
-      transform: translateY(32px);
+      opacity: 0; transform: translateY(32px);
       transition: opacity 0.7s ease, transform 0.7s ease;
     }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
 
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ── RESPONSIVE ── */
+    /* RESPONSIVE */
     @media (max-width: 900px) {
       nav { padding: 16px 24px; }
       section { padding: 72px 24px; }
       .hero { padding: 120px 24px 72px; }
-
-      .problem-grid,
-      .dashboard-wrap { grid-template-columns: 1fr; gap: 40px; }
-
-      .steps,
-      .pricing-grid,
-      .testimonial-grid { grid-template-columns: 1fr; }
-
-      .fc-metrics { grid-template-columns: repeat(3, 1fr); }
-
+      .problem-grid, .dashboard-wrap { grid-template-columns: 1fr; gap: 40px; }
+      .steps, .pricing-grid, .testimonial-grid { grid-template-columns: 1fr; }
       .stat-bar { flex-direction: column; }
       .stat { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); }
       .stat:last-child { border-bottom: none; }
-
-      .waitlist-form { flex-direction: column; }
-      .waitlist-input { border-right: 1px solid rgba(255,255,255,0.12); }
-
-      .final-form { flex-direction: column; padding: 0 24px; }
-
       footer { flex-direction: column; gap: 12px; text-align: center; }
     }
   </style>
@@ -835,7 +408,7 @@
     <button class="nav-cta"
       data-tally-open="44vExr"
       data-tally-layout="modal"
-      data-tally-emoji-text="🥊"
+      data-tally-emoji-text="&#x1F94A;"
       data-tally-emoji-animation="wave">
       Join Waitlist
     </button>
@@ -844,13 +417,12 @@
   <!-- HERO -->
   <section class="hero">
     <div class="hero-bg"></div>
-    <p class="hero-tag">AI Revenue Agent · Combat Sports</p>
+    <p class="hero-tag">AI Revenue Agent &middot; Combat Sports</p>
     <h1>Your Gym Is <em>Bleeding Money.</em></h1>
     <p class="hero-sub">
       Every unanswered DM. Every forgotten follow-up. Every member who drifted away in silence.<br><br>
-      <strong>FightGrowth fixes all of it — automatically.</strong> The AI agent that converts leads, retains members, and closes deals while you coach.
+      <strong>FightGrowth fixes all of it &#x2014; automatically.</strong> The AI agent that converts leads, retains members, and closes deals while you coach.
     </p>
-
     <div class="stat-bar">
       <div class="stat">
         <div class="stat-num">90s</div>
@@ -865,19 +437,15 @@
         <div class="stat-label">Manual follow-ups required</div>
       </div>
     </div>
-
-    <div class="waitlist-section" id="waitlist">
-      <div class="waitlist-form">
-        <button class="waitlist-btn" style="padding: 16px 40px; font-size:15px;"
-          data-tally-open="44vExr"
-          data-tally-layout="modal"
-          data-tally-align-left="1"
-          data-tally-emoji-text="🥊"
-          data-tally-emoji-animation="wave">
-          Get Early Access — Free
-        </button>
-      </div>
-      <p class="waitlist-note">Free to join · No credit card · First 100 gyms get founding rate locked forever</p>
+    <div class="waitlist-section">
+      <button class="btn-tally"
+        data-tally-open="44vExr"
+        data-tally-layout="modal"
+        data-tally-emoji-text="&#x1F94A;"
+        data-tally-emoji-animation="wave">
+        Get Early Access &#x2014; Free
+      </button>
+      <p class="waitlist-note">Free to join &middot; No credit card &middot; First 100 gyms get founding rate locked forever</p>
     </div>
   </section>
 
@@ -889,12 +457,12 @@
     </div>
     <div class="problem-grid reveal">
       <div class="problem-statement">
-        A lead DMs your gym at 11PM on a Saturday. You're coaching. You see it Sunday morning. You mean to reply — but training starts in 10 minutes.<br><br>
+        A lead DMs your gym at 11PM on a Saturday. You're coaching. You see it Sunday morning. You mean to reply &#x2014; but training starts in 10 minutes.<br><br>
         By Monday, <strong>they've joined the gym down the street.</strong><br><br>
-        This happens 20–30 times a month. Every single month. You feel it but you can't see it. FightGrowth makes it visible — and stops it from ever happening again.
+        This happens 20&#x2013;30 times a month. Every single month. You feel it but you can't see it. FightGrowth makes it visible &#x2014; and stops it from ever happening again.
       </div>
       <div class="problem-math">
-        <div class="math-title">// Your Revenue Leak — The Math</div>
+        <div class="math-title">// Your Revenue Leak &#x2014; The Math</div>
         <div class="math-row">
           <span class="label">Monthly inquiries (avg gym)</span>
           <span class="value">40</span>
@@ -905,15 +473,15 @@
         </div>
         <div class="math-row">
           <span class="label">Leads actually converting</span>
-          <span class="value">4–5/mo</span>
+          <span class="value">4&#x2013;5/mo</span>
         </div>
         <div class="math-row">
           <span class="label">With FightGrowth (100% follow-up)</span>
-          <span class="value" style="color: var(--accent)">22–26/mo</span>
+          <span class="value" style="color:var(--accent)">22&#x2013;26/mo</span>
         </div>
         <div class="math-row">
           <span class="label">At $150/month membership</span>
-          <span class="value">×$150</span>
+          <span class="value">x $150</span>
         </div>
         <div class="math-row highlight">
           <span class="label">Extra MRR per month</span>
@@ -933,42 +501,41 @@
       <div class="steps reveal">
         <div class="step">
           <div class="step-num">01</div>
-          <div class="step-icon">⚡</div>
+          <div class="step-icon">&#x26A1;</div>
           <div class="step-title">Capture Every Lead</div>
-          <p class="step-desc">Instagram DMs, Facebook messages, website forms, SMS — every inquiry from every channel hits one unified pipeline within 90 seconds. Nothing falls through the cracks.</p>
+          <p class="step-desc">Instagram DMs, Facebook messages, website forms, SMS &#x2014; every inquiry from every channel hits one unified pipeline within 90 seconds. Nothing falls through the cracks.</p>
         </div>
         <div class="step">
           <div class="step-num">02</div>
-          <div class="step-icon">🧠</div>
-          <div class="step-title">AI Reads & Adapts</div>
+          <div class="step-icon">&#x1F9E0;</div>
+          <div class="step-title">AI Reads &amp; Adapts</div>
           <p class="step-desc">The agent reads every reply, detects intent and tone, then adjusts its entire sequence in real time. Warm lead? Accelerate. Price objection? Reframe ROI. Gone cold? Escalate with a deadline.</p>
         </div>
         <div class="step">
           <div class="step-num">03</div>
-          <div class="step-icon">🏆</div>
+          <div class="step-icon">&#x1F3C6;</div>
           <div class="step-title">Closes or Stands Down</div>
-          <p class="step-desc">Deal closes → agent sends onboarding, stops sequence. Lead dies → graceful exit, archived, resurrected in 60 days. You only hear about it when something happens.</p>
+          <p class="step-desc">Deal closes? Agent sends onboarding and stops. Lead dies? Graceful exit, archived, resurrected in 60 days. You only hear about it when something happens.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- FIGHT CARD DASHBOARD -->
+  <!-- DASHBOARD -->
   <section class="dashboard-section">
     <div class="dashboard-wrap reveal">
       <div class="dashboard-copy">
         <p class="section-tag">The Fight Card</p>
         <h2 class="section-title">YOUR BUSINESS. LIVE. IN ONE SCREEN.</h2>
-        <p>Every lead, every sequence, every deal — displayed like a fight card. Hot leads, warm pipeline, closed deals, and resurrections. All running without you.</p>
+        <p>Every lead, every sequence, every deal &#x2014; displayed like a fight card. Hot leads, warm pipeline, closed deals, and resurrections. All running without you.</p>
         <ul>
           <li>See every active sequence in real time</li>
-          <li>Dollar value of pipeline at risk — updated daily</li>
+          <li>Dollar value of pipeline at risk &#x2014; updated daily</li>
           <li>One tap to review or approve any message</li>
           <li>Churn alerts before members go quiet</li>
           <li>TV mode for your back office wall</li>
         </ul>
       </div>
-
       <div class="fight-card">
         <div class="fc-header">
           <div class="fc-title">TONIGHT'S FIGHT CARD</div>
@@ -976,33 +543,33 @@
         </div>
         <div class="fc-body">
           <div class="fc-section">
-            <div class="fc-section-label"><span style="color:#ff6b6b">🔴</span> HOT LEADS — ACT WITHIN 24HRS</div>
+            <div class="fc-section-label">HOT LEADS &#x2014; ACT WITHIN 24HRS</div>
             <div class="fc-row">
               <span class="fc-row-name">Jordan T.</span>
               <span class="fc-row-status status-hot">Trial class booked</span>
             </div>
             <div class="fc-row">
               <span class="fc-row-name">Keisha M.</span>
-              <span class="fc-row-status status-hot">Price objection · Stage 3</span>
+              <span class="fc-row-status status-hot">Price objection &middot; Stage 3</span>
             </div>
           </div>
           <div class="fc-section">
-            <div class="fc-section-label"><span style="color:var(--accent)">🟡</span> IN SEQUENCE — AGENT HANDLING</div>
+            <div class="fc-section-label">IN SEQUENCE &#x2014; AGENT HANDLING</div>
             <div class="fc-row">
               <span class="fc-row-name">Marcus R.</span>
-              <span class="fc-row-status status-warm">Day 4 of 5 · Warm signal</span>
+              <span class="fc-row-status status-warm">Day 4 of 5 &middot; Warm signal</span>
             </div>
             <div class="fc-row">
               <span class="fc-row-name">Devon A.</span>
-              <span class="fc-row-status status-warm">Deadline introduced · Day 13</span>
+              <span class="fc-row-status status-warm">Deadline introduced &middot; Day 13</span>
             </div>
             <div class="fc-row">
               <span class="fc-row-name">Priya N.</span>
-              <span class="fc-row-status status-warm">Paused · Said "next week"</span>
+              <span class="fc-row-status status-warm">Paused &middot; Said "next week"</span>
             </div>
           </div>
           <div class="fc-section">
-            <div class="fc-section-label"><span style="color:#6bffb8">🟢</span> CLOSED THIS WEEK</div>
+            <div class="fc-section-label">CLOSED THIS WEEK</div>
             <div class="fc-row">
               <span class="fc-row-name">4 new members</span>
               <span class="fc-row-status status-closed">+$580 MRR</span>
@@ -1040,7 +607,7 @@
       </div>
       <div class="pricing-grid reveal">
         <div class="plan">
-          <div class="plan-badge">Free · Preview Mode</div>
+          <div class="plan-badge">Free &middot; Preview Mode</div>
           <div class="plan-name">Watcher</div>
           <div class="plan-price"><sup>$</sup>0</div>
           <div class="plan-period">forever free</div>
@@ -1054,37 +621,35 @@
           <button class="plan-cta"
             data-tally-open="44vExr"
             data-tally-layout="modal"
-            data-tally-emoji-text="🥊"
+            data-tally-emoji-text="&#x1F94A;"
             data-tally-emoji-animation="wave">
             Start Free
           </button>
         </div>
-
         <div class="plan featured">
-          <div class="plan-badge">Most Popular · Founding Rate</div>
+          <div class="plan-badge">Most Popular &middot; Founding Rate</div>
           <div class="plan-name">Head Coach</div>
           <div class="plan-price"><sup>$</sup>89</div>
-          <div class="plan-period">per month · or $749/year</div>
+          <div class="plan-period">per month &middot; or $749/year</div>
           <ul class="plan-features">
-            <li>Full autonomous agent — actually sends</li>
+            <li>Full autonomous agent &#x2014; actually sends</li>
             <li>All lead sources connected (IG, FB, SMS, web)</li>
             <li>Tone adaptation engine</li>
             <li>Dead lead resurrection every 60 days</li>
             <li>Churn prediction + save sequences</li>
             <li>Up to 50 simultaneous sequences</li>
-            <li>Trust Stack — full control of autonomy</li>
+            <li>Trust Stack &#x2014; full control of autonomy</li>
           </ul>
           <button class="plan-cta"
             data-tally-open="44vExr"
             data-tally-layout="modal"
-            data-tally-emoji-text="🥊"
+            data-tally-emoji-text="&#x1F94A;"
             data-tally-emoji-animation="wave">
             Get Early Access
           </button>
         </div>
-
         <div class="plan">
-          <div class="plan-badge">Multi-location · Agencies</div>
+          <div class="plan-badge">Multi-location &middot; Agencies</div>
           <div class="plan-name">Promoter</div>
           <div class="plan-price"><sup>$</sup>199</div>
           <div class="plan-period">per month</div>
@@ -1100,7 +665,7 @@
           <button class="plan-cta"
             data-tally-open="44vExr"
             data-tally-layout="modal"
-            data-tally-emoji-text="🥊"
+            data-tally-emoji-text="&#x1F94A;"
             data-tally-emoji-animation="wave">
             Contact Us
           </button>
@@ -1117,32 +682,32 @@
     </div>
     <div class="testimonial-grid reveal">
       <div class="testimonial">
-        <p class="testimonial-text">"I had 34 inquiries last month. I followed up with maybe 8. I knew I was leaving money on the table — I just didn't know how much. Seeing the number was brutal."</p>
+        <p class="testimonial-text">"I had 34 inquiries last month. I followed up with maybe 8. I knew I was leaving money on the table &#x2014; I just didn't know how much. Seeing the number was brutal."</p>
         <div class="testimonial-author">
           <div class="author-avatar">M</div>
           <div>
             <div class="author-name">Marcus D.</div>
-            <div class="author-title">Owner, Iron Temple MMA · Chicago</div>
+            <div class="author-title">Owner, Iron Temple MMA &middot; Chicago</div>
           </div>
         </div>
       </div>
       <div class="testimonial">
-        <p class="testimonial-text">"I'm a coach. I'm not a salesperson. This is the first tool that gets that. I set my rules once and it just... handles it. I got 3 new members my first week without doing anything different."</p>
+        <p class="testimonial-text">"I'm a coach, not a salesperson. This is the first tool that gets that. I set my rules once and it just handles it. Got 3 new members my first week without doing anything different."</p>
         <div class="testimonial-author">
           <div class="author-avatar">S</div>
           <div>
             <div class="author-name">Sofia R.</div>
-            <div class="author-title">Head Coach & Owner, SouthPaw Boxing</div>
+            <div class="author-title">Head Coach &amp; Owner, SouthPaw Boxing</div>
           </div>
         </div>
       </div>
       <div class="testimonial">
-        <p class="testimonial-text">"The resurrection feature brought back a lead I hadn't spoken to in 4 months. They signed up for a 6-month membership. That one conversation paid for a year of this software."</p>
+        <p class="testimonial-text">"The resurrection feature brought back a lead I hadn't spoken to in 4 months. They signed up for a 6-month membership. One conversation paid for a full year of this software."</p>
         <div class="testimonial-author">
           <div class="author-avatar">K</div>
           <div>
             <div class="author-name">Kevin T.</div>
-            <div class="author-title">Owner, Apex BJJ Academy · Houston</div>
+            <div class="author-title">Owner, Apex BJJ Academy &middot; Houston</div>
           </div>
         </div>
       </div>
@@ -1152,14 +717,15 @@
   <!-- FINAL CTA -->
   <section class="final-cta">
     <h2>STOP COACHING FOR FREE.<em>START CLOSING.</em></h2>
-    <p>Join 200+ gym owners on the waitlist. First 100 get the founding rate — locked forever.</p>
-    <div class="final-form" style="justify-content:center; margin-top:44px;">
-      <button class="waitlist-btn" style="padding: 18px 48px; font-size:15px;"
+    <p>Join 200+ gym owners on the waitlist. First 100 get the founding rate &#x2014; locked forever.</p>
+    <div class="final-cta-btn">
+      <button class="btn-tally"
+        style="padding: 20px 56px; font-size: 15px;"
         data-tally-open="44vExr"
         data-tally-layout="modal"
-        data-tally-emoji-text="🥊"
+        data-tally-emoji-text="&#x1F94A;"
         data-tally-emoji-animation="wave">
-        Claim Your Spot — Free
+        Claim Your Spot &#x2014; Free
       </button>
     </div>
   </section>
@@ -1167,57 +733,19 @@
   <!-- FOOTER -->
   <footer>
     <div class="footer-logo">FIGHT<span>GROWTH</span></div>
-    <div class="footer-copy">© 2026 FightGrowth. All rights reserved.</div>
-    <a href="/cdn-cgi/l/email-protection#24575154544b565064424d434c5043564b53504c0a474b49" class="footer-email"><span class="__cf_email__" data-cfemail="681b1d1818071a1c280e010f001c0f1a071f1c00460b0705">[email&#160;protected]</span></a>
+    <div class="footer-copy">&copy; 2026 FightGrowth. All rights reserved.</div>
+    <a href="mailto:support@fightgrowth.com" class="footer-email">support&#64;fightgrowth.com</a>
   </footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-    // Scroll reveal
+  <script>
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
+        if (entry.isIntersecting) entry.target.classList.add('visible');
       });
     }, { threshold: 0.1 });
     reveals.forEach(el => observer.observe(el));
+  </script>
 
-    // Waitlist handler
-    function handleSignup(inputId) {
-      const input = document.getElementById(inputId);
-      const email = input.value.trim();
-      if (!email || !email.includes('@')) {
-        input.style.borderColor = 'var(--red)';
-        input.placeholder = 'Enter a valid email';
-        setTimeout(() => {
-          input.style.borderColor = '';
-          input.placeholder = 'your@email.com';
-        }, 2000);
-        return;
-      }
-      // Replace this URL with your Tally or Mailerlite form endpoint
-      const btn = input.nextElementSibling;
-      btn.textContent = "You're In ✓";
-      btn.style.background = '#1a7a4a';
-      input.value = '';
-      input.placeholder = 'Check your email!';
-      setTimeout(() => {
-        btn.textContent = btn.id === 'footer-email' ? 'Claim Your Spot' : 'Get Early Access';
-        btn.style.background = '';
-        input.placeholder = 'your@email.com';
-      }, 4000);
-    }
-
-    // Enter key on inputs
-    document.querySelectorAll('.waitlist-input').forEach(input => {
-      input.addEventListener('keydown', e => {
-        if (e.key === 'Enter') {
-          input.nextElementSibling.click();
-        }
-      });
-    });
-
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('cl
+</body>
+</html>
