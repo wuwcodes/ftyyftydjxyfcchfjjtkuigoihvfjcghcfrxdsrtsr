@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Revenue Gap Calculator — FightGrowth</title>
+  <meta name="description" content="Find out exactly how much revenue your gym is losing from missed leads and slow follow-up. Free calculator for martial arts gym owners." />
+  <script async src="https://tally.so/widgets/embed.js"></script>
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "w6ir9eokmi");
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --black: #0a0a0a; --red: #e8281e; --red-dim: #9e1c14;
+      --white: #f5f0eb; --gray: #1a1a1a; --gray-mid: #222;
+      --gray-light: #888; --accent: #f5c842; --green: #6bffb8;
+    }
+    html { scroll-behavior: smooth; }
+    body { background:var(--black); color:var(--white); font-family:'DM Sans',sans-serif; font-size:16px; line-height:1.6; overflow-x:hidden; min-height:100vh; }
+    body::before { content:''; position:fixed; inset:0; pointer-events:none; z-index:999; opacity:0.35; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); }
+
+    /* NAV */
+    nav { display:flex; align-items:center; justify-content:space-between; padding:20px 48px; border-bottom:1px solid rgba(255,255,255,0.06); }
+    .nav-logo { font-family:'Bebas Neue',sans-serif; font-size:26px; letter-spacing:2px; color:var(--white); text-decoration:none; }
+    .nav-logo span { color:var(--red); }
+    .nav-back { font-family:'DM Mono',monospace; font-size:12px; color:var(--gray-light); text-decoration:none; letter-spacing:1px; display:flex; align-items:center; gap:8px; transition:color 0.2s; }
+    .nav-back:hover { color:var(--white); }
+
+    /* HERO */
+    .hero { text-align:center; padding:80px 48px 60px; position:relative; }
+    .hero::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 60% 50% at 50% 0%,rgba(232,40,30,0.1) 0%,transparent 70%); pointer-events:none; }
+    .hero-tag { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--red); margin-bottom:20px; }
+    .hero h1 { font-family:'Bebas Neue',sans-serif; font-size:clamp(48px,8vw,100px); line-height:0.92; letter-spacing:2px; }
+    .hero h1 em { font-style:normal; color:var(--red); }
+    .hero-sub { font-size:18px; color:rgba(245,240,235,0.6); max-width:500px; margin:20px auto 0; line-height:1.7; }
+
+    /* MAIN LAYOUT */
+    .calc-wrapper { max-width:1000px; margin:0 auto; padding:0 48px 80px; display:grid; grid-template-columns:1fr 1fr; gap:32px; align-items:start; }
+
+    /* INPUTS PANEL */
+    .inputs-panel { background:var(--gray); border:1px solid rgba(255,255,255,0.08); padding:40px; }
+    .panel-title { font-family:'Bebas Neue',sans-serif; font-size:28px; letter-spacing:1px; margin-bottom:32px; display:flex; align-items:center; gap:12px; }
+    .panel-title-icon { font-size:24px; }
+
+    .input-group { margin-bottom:28px; }
+    .input-group:last-child { margin-bottom:0; }
+    .input-label { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--gray-light); margin-bottom:8px; display:flex; justify-content:space-between; align-items:center; }
+    .input-hint { font-size:10px; color:rgba(136,136,136,0.7); font-family:'DM Sans',sans-serif; letter-spacing:0; text-transform:none; }
+
+    /* Slider */
+    .slider-wrap { display:flex; align-items:center; gap:16px; }
+    .slider-val { font-family:'Bebas Neue',sans-serif; font-size:32px; color:var(--white); min-width:80px; text-align:right; line-height:1; }
+    .slider-val.accent { color:var(--accent); }
+    input[type=range] { -webkit-appearance:none; appearance:none; flex:1; height:4px; border-radius:2px; outline:none; cursor:pointer; background:linear-gradient(to right,var(--red) 0%,var(--red) var(--pct,50%),rgba(255,255,255,0.1) var(--pct,50%),rgba(255,255,255,0.1) 100%); }
+    input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:18px; height:18px; border-radius:50%; background:var(--white); border:2px solid var(--red); cursor:pointer; transition:transform 0.15s; box-shadow:0 2px 8px rgba(0,0,0,0.4); }
+    input[type=range]::-webkit-slider-thumb:hover { transform:scale(1.2); }
+    input[type=range]::-moz-range-thumb { width:18px; height:18px; border-radius:50%; background:var(--white); border:2px solid var(--red); cursor:pointer; }
+
+    /* RESULTS PANEL */
+    .results-panel { position:sticky; top:24px; }
+
+    .result-card { background:var(--gray); border:1px solid rgba(255,255,255,0.08); padding:32px; margin-bottom:12px; }
+    .result-card.danger { border-color:rgba(232,40,30,0.3); background:rgba(232,40,30,0.05); }
+    .result-card.success { border-color:rgba(107,255,184,0.2); background:rgba(107,255,184,0.03); }
+    .result-card.highlight { border-color:rgba(245,200,66,0.3); background:rgba(245,200,66,0.05); }
+
+    .result-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--gray-light); margin-bottom:10px; }
+    .result-value { font-family:'Bebas Neue',sans-serif; font-size:52px; line-height:1; color:var(--white); }
+    .result-value.red { color:var(--red); }
+    .result-value.green { color:var(--green); }
+    .result-value.yellow { color:var(--accent); }
+    .result-sub { font-size:13px; color:rgba(245,240,235,0.5); margin-top:6px; line-height:1.5; }
+
+    /* VERDICT */
+    .verdict { background:var(--black); border:1px solid rgba(255,255,255,0.08); padding:28px; margin-top:12px; }
+    .verdict-title { font-family:'Bebas Neue',sans-serif; font-size:20px; letter-spacing:1px; color:var(--white); margin-bottom:10px; }
+    .verdict-text { font-size:14px; color:rgba(245,240,235,0.65); line-height:1.7; }
+    .verdict-text strong { color:var(--white); }
+
+    /* BREAKDOWN */
+    .breakdown { background:var(--gray-mid); border:1px solid rgba(255,255,255,0.06); padding:24px; margin-top:12px; }
+    .breakdown-title { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--gray-light); margin-bottom:16px; }
+    .breakdown-row { display:flex; justify-content:space-between; align-items:center; padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.05); font-size:13px; }
+    .breakdown-row:last-child { border-bottom:none; }
+    .breakdown-label { color:rgba(245,240,235,0.6); }
+    .breakdown-value { font-family:'DM Mono',monospace; color:var(--white); }
+    .breakdown-value.red { color:var(--red); }
+    .breakdown-value.green { color:var(--green); }
+    .breakdown-section-label { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:var(--red); margin:14px 0 6px; opacity:0.7; }
+
+    /* CTA */
+    .calc-cta { text-align:center; margin-top:16px; }
+    .btn-tally { display:inline-block; background:var(--red); color:var(--white); font-family:'DM Mono',monospace; font-size:13px; font-weight:500; letter-spacing:1px; text-transform:uppercase; padding:16px 36px; border:none; cursor:pointer; transition:background 0.2s,transform 0.15s; width:100%; }
+    .btn-tally:hover { background:#ff3329; transform:translateY(-1px); }
+    .cta-note { font-size:11px; color:var(--gray-light); margin-top:10px; }
+
+    /* ANNUAL TOGGLE */
+    .view-toggle { display:flex; justify-content:center; gap:8px; margin-bottom:16px; }
+    .toggle-btn { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:1px; padding:6px 16px; background:transparent; border:1px solid rgba(255,255,255,0.15); color:var(--gray-light); cursor:pointer; transition:all 0.15s; }
+    .toggle-btn.active { background:var(--red); border-color:var(--red); color:var(--white); }
+
+    /* SHARE LINE */
+    .share-line { font-family:'DM Mono',monospace; font-size:11px; color:var(--gray-light); text-align:center; margin-top:12px; letter-spacing:0.5px; }
+    .share-line span { color:var(--accent); }
+
+    /* PULSE ANIMATION on result change */
+    @keyframes pulse-num { 0%{transform:scale(1)} 50%{transform:scale(1.04)} 100%{transform:scale(1)} }
+    .pulse { animation:pulse-num 0.3s ease; }
+
+    @media(max-width:768px){
+      nav{padding:16px 20px}
+      .hero{padding:60px 20px 40px}
+      .calc-wrapper{grid-template-columns:1fr;padding:0 20px 60px;gap:24px}
+      .inputs-panel{padding:28px 24px}
+      .results-panel{position:static}
+      .result-value{font-size:40px}
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-back">&#x2190; Back to FightGrowth</a>
+    <a href="/" class="nav-logo">FIGHT<span>GROWTH</span></a>
+  </nav>
+
+  <div class="hero">
+    <p class="hero-tag">Free Tool &middot; Takes 60 Seconds</p>
+    <h1>YOUR GYM'S <em>REVENUE GAP</em></h1>
+    <p class="hero-sub">Adjust the sliders to see exactly how much your gym is losing every month from missed leads and slow follow-up.</p>
+  </div>
+
+  <div class="calc-wrapper">
+
+    <!-- INPUTS -->
+    <div class="inputs-panel">
+      <div class="panel-title"><span class="panel-title-icon">&#x1F4CA;</span> Your Gym Numbers</div>
+
+      <div class="input-group">
+        <div class="input-label">Monthly Inquiries <span class="input-hint">DMs, calls, walk-ins, web forms</span></div>
+        <div class="slider-wrap">
+          <input type="range" id="inquiries" min="5" max="150" value="40" oninput="calc()" />
+          <div class="slider-val" id="val-inquiries">40</div>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <div class="input-label">Your Follow-up Rate <span class="input-hint">% of leads you actually reply to</span></div>
+        <div class="slider-wrap">
+          <input type="range" id="followup" min="5" max="100" value="30" oninput="calc()" />
+          <div class="slider-val accent" id="val-followup">30%</div>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <div class="input-label">Conversion Rate <span class="input-hint">% of followed-up leads who join</span></div>
+        <div class="slider-wrap">
+          <input type="range" id="conversion" min="5" max="90" value="40" oninput="calc()" />
+          <div class="slider-val" id="val-conversion">40%</div>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <div class="input-label">Monthly Membership Value <span class="input-hint">average per member</span></div>
+        <div class="slider-wrap">
+          <input type="range" id="membership" min="50" max="500" value="150" oninput="calc()" />
+          <div class="slider-val" id="val-membership">$150</div>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <div class="input-label">Avg Member Lifetime <span class="input-hint">months they stay before leaving</span></div>
+        <div class="slider-wrap">
+          <input type="range" id="lifetime" min="1" max="36" value="8" oninput="calc()" />
+          <div class="slider-val" id="val-lifetime">8mo</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESULTS -->
+    <div class="results-panel">
+
+      <div class="view-toggle">
+        <button class="toggle-btn active" id="btn-monthly" onclick="setView('monthly')">Monthly</button>
+        <button class="toggle-btn" id="btn-annual" onclick="setView('annual')">Annual</button>
+      </div>
+
+      <div class="result-card danger">
+        <div class="result-label">Revenue You're Losing</div>
+        <div class="result-value red" id="res-lost">$0</div>
+        <div class="result-sub" id="res-lost-sub">per month from leads you never followed up on</div>
+      </div>
+
+      <div class="result-card success">
+        <div class="result-label">Revenue You Could Recover</div>
+        <div class="result-value green" id="res-gain">$0</div>
+        <div class="result-sub" id="res-gain-sub">per month with 100% follow-up rate</div>
+      </div>
+
+      <div class="result-card highlight">
+        <div class="result-label">Lifetime Value of Missed Members</div>
+        <div class="result-value yellow" id="res-ltv">$0</div>
+        <div class="result-sub" id="res-ltv-sub">total value lost per month over member lifetime</div>
+      </div>
+
+      <div class="breakdown">
+        <div class="breakdown-title">// Full Breakdown</div>
+        <div class="breakdown-section-label">LEADS</div>
+        <div class="breakdown-row"><span class="breakdown-label">Total inquiries per month</span><span class="breakdown-value" id="br-inquiries">40 leads</span></div>
+        <div class="breakdown-row"><span class="breakdown-label">Leads you follow up on</span><span class="breakdown-value" id="br-followed">12 leads (30%)</span></div>
+        <div class="breakdown-row"><span class="breakdown-label">Leads you never reply to</span><span class="breakdown-value red" id="br-missed">28 leads (70%)</span></div>
+        <div class="breakdown-section-label">MEMBERS</div>
+        <div class="breakdown-row"><span class="breakdown-label">Members you could be getting</span><span class="breakdown-value green" id="br-potential">16 members/mo</span></div>
+        <div class="breakdown-row"><span class="breakdown-label">Members you're actually getting</span><span class="breakdown-value" id="br-actual">5 members/mo</span></div>
+        <div class="breakdown-row"><span class="breakdown-label">Member gap per month</span><span class="breakdown-value red" id="br-gap">11 members/mo</span></div>
+        <div class="breakdown-section-label">REVENUE PER LEAD</div>
+        <div class="breakdown-row"><span class="breakdown-label">Expected revenue per lead contacted</span><span class="breakdown-value" id="br-rev-lead">$60</span></div>
+        <div class="breakdown-row"><span class="breakdown-label">Lifetime value per missed lead</span><span class="breakdown-value red" id="br-ltv-lead">$480</span></div>
+        <div class="breakdown-section-label">THE COST OF SILENCE</div>
+        <div class="breakdown-row"><span class="breakdown-label">Revenue lost per month</span><span class="breakdown-value red" id="br-monthly-lost">$1,650</span></div>
+        <div class="breakdown-row"><span class="breakdown-label">Revenue lost per year</span><span class="breakdown-value red" id="br-annual-lost">$19,800</span></div>
+        <div class="breakdown-section-label">VS FIGHTGROWTH</div>
+        <div class="breakdown-row"><span class="breakdown-label">FightGrowth cost</span><span class="breakdown-value" id="br-fightgrowth">$89/mo</span></div>
+        <div class="breakdown-row"><span class="breakdown-label">First-month ROI</span><span class="breakdown-value green" id="br-roi">0%</span></div>
+      </div>
+
+      <div class="verdict">
+        <div class="verdict-title" id="verdict-title">Your Revenue Gap</div>
+        <div class="verdict-text" id="verdict-text">Adjust the sliders to see your personalised result.</div>
+      </div>
+
+      <div class="share-line">FightGrowth closes this gap &middot; <span>automatically</span></div>
+
+      <div class="calc-cta">
+        <button class="btn-tally" data-tally-open="44vExr" data-tally-layout="modal" data-tally-emoji-text="&#x1F94A;" data-tally-emoji-animation="wave">
+          Close This Gap &#x2014; Join Waitlist
+        </button>
+        <div class="cta-note">Free to join &middot; Founding rate $49/mo &middot; First 50 gyms only</div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    let viewMode = 'monthly';
+
+    function setView(mode) {
+      viewMode = mode;
+      document.getElementById('btn-monthly').classList.toggle('active', mode === 'monthly');
+      document.getElementById('btn-annual').classList.toggle('active', mode === 'annual');
+      calc();
+    }
+
+    function fmt(n) {
+      return '$' + Math.round(n).toLocaleString();
+    }
+
+    function fmtK(n) {
+      if(n >= 1000000) return '$' + (n/1000000).toFixed(2) + 'M';
+      if(n >= 1000) return '$' + (n/1000).toFixed(1) + 'K';
+      return '$' + Math.round(n).toLocaleString();
+    }
+
+    function pulse(id) {
+      const el = document.getElementById(id);
+      el.classList.remove('pulse');
+      void el.offsetWidth;
+      el.classList.add('pulse');
+    }
+
+    function updateSlider(input) {
+      const pct = ((input.value - input.min) / (input.max - input.min) * 100).toFixed(1) + '%';
+      input.style.setProperty('--pct', pct);
+    }
+
+    function calc() {
+      const inquiries  = +document.getElementById('inquiries').value;
+      const followup   = +document.getElementById('followup').value / 100;
+      const conversion = +document.getElementById('conversion').value / 100;
+      const membership = +document.getElementById('membership').value;
+      const lifetime   = +document.getElementById('lifetime').value;
+
+      // Update slider fills
+      document.querySelectorAll('input[type=range]').forEach(updateSlider);
+
+      // Update labels
+      document.getElementById('val-inquiries').textContent  = inquiries;
+      document.getElementById('val-followup').textContent   = Math.round(followup * 100) + '%';
+      document.getElementById('val-conversion').textContent = Math.round(conversion * 100) + '%';
+      document.getElementById('val-membership').textContent = '$' + membership;
+      document.getElementById('val-lifetime').textContent   = lifetime + 'mo';
+
+      // Core maths
+      const followed   = Math.round(inquiries * followup);
+      const missed     = inquiries - followed;
+      const actualMem  = Math.round(followed * conversion);
+      const potentialMem = Math.round(inquiries * conversion);
+      const gapMem     = potentialMem - actualMem;
+
+      const monthlyLost  = gapMem * membership;
+      const monthlyGain  = gapMem * membership;
+      const ltvLost      = gapMem * membership * lifetime;
+
+      const mult = viewMode === 'annual' ? 12 : 1;
+      const period = viewMode === 'annual' ? 'per year' : 'per month';
+
+      // Update results
+      document.getElementById('res-lost').textContent = fmt(monthlyLost * mult);
+      document.getElementById('res-lost-sub').textContent = period + ' from leads you never followed up on';
+      document.getElementById('res-gain').textContent = fmt(monthlyGain * mult);
+      document.getElementById('res-gain-sub').textContent = period + ' with 100% follow-up rate';
+      document.getElementById('res-ltv').textContent = fmt(ltvLost * (viewMode === 'annual' ? 12 : 1));
+      document.getElementById('res-ltv-sub').textContent = 'total value lost ' + period + ' over member lifetime';
+
+      // Breakdown
+      const revenuePerLead     = (conversion * membership).toFixed(2);
+      const costPerMissedLead  = (conversion * membership * lifetime).toFixed(2);
+      const fightgrowthCost    = 89;
+      const roi                = monthlyLost > 0 ? ((monthlyLost - fightgrowthCost) / fightgrowthCost * 100).toFixed(0) : 0;
+
+      document.getElementById('br-inquiries').textContent    = inquiries + ' leads';
+      document.getElementById('br-followed').textContent     = followed + ' leads (' + Math.round(followup*100) + '%)';
+      document.getElementById('br-missed').textContent       = missed + ' leads (' + Math.round((1-followup)*100) + '%)';
+      document.getElementById('br-potential').textContent    = potentialMem + ' members/mo';
+      document.getElementById('br-actual').textContent       = actualMem + ' members/mo';
+      document.getElementById('br-gap').textContent          = gapMem + ' members/mo';
+      document.getElementById('br-rev-lead').textContent     = '$' + parseFloat(revenuePerLead).toLocaleString();
+      document.getElementById('br-ltv-lead').textContent     = '$' + parseFloat(costPerMissedLead).toLocaleString();
+      document.getElementById('br-monthly-lost').textContent = fmt(monthlyLost);
+      document.getElementById('br-annual-lost').textContent  = fmt(monthlyLost * 12);
+      document.getElementById('br-fightgrowth').textContent  = '$89/mo';
+      document.getElementById('br-roi').textContent          = roi + '%';
+
+      // Pulse
+      pulse('res-lost'); pulse('res-gain'); pulse('res-ltv');
+
+      // Verdict
+      const annualLost = monthlyLost * 12;
+      let title, text;
+      if(annualLost < 5000) {
+        title = 'Small Leak — Still Worth Fixing';
+        text = `You're losing an estimated <strong>${fmt(monthlyLost)}/month</strong> from missed follow-ups. That's <strong>${fmt(annualLost)}/year</strong>. Small gyms see the biggest percentage gains from fixing this — even one extra member per month compounds fast.`;
+      } else if(annualLost < 20000) {
+        title = 'Significant Revenue Gap';
+        text = `You're leaving roughly <strong>${fmt(monthlyLost)}/month</strong> on the table — <strong>${fmt(annualLost)}/year</strong>. That's real money. At this level, a simple automated follow-up system pays for itself within the first week.`;
+      } else if(annualLost < 60000) {
+        title = 'This Is A Serious Problem';
+        text = `<strong>${fmt(monthlyLost)}/month</strong> — <strong>${fmt(annualLost)}/year</strong> — is slipping through the cracks. At this scale you're essentially paying a full-time salary's worth of revenue to do nothing. FightGrowth at $89/month fixes this entirely.`;
+      } else {
+        title = 'Your Gym Is Haemorrhaging Revenue';
+        text = `<strong>${fmt(annualLost)}/year</strong> in potential revenue is being left on the table. This isn't a minor inefficiency — it's a structural problem that compounds every month you don't fix it. The good news: it's entirely preventable.`;
+      }
+
+      document.getElementById('verdict-title').textContent = title;
+      document.getElementById('verdict-text').innerHTML = text;
+    }
+
+    // Init
+    document.querySelectorAll('input[type=range]').forEach(updateSlider);
+    calc();
+  </script>
+</body>
+</html>
