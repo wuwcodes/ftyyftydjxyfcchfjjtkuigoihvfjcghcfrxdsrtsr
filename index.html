@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="icon" type="image/png" href="favicon.png">
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FightGrowth — The AI Revenue Agent for Combat Sports Gyms</title>
@@ -26,15 +25,11 @@
     html { scroll-behavior: smooth; }
     body { background:var(--black); color:var(--white); font-family:'DM Sans',sans-serif; font-size:16px; line-height:1.6; overflow-x:hidden; }
     body::before { content:''; position:fixed; inset:0; pointer-events:none; z-index:999; opacity:0.4; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); }
-
-    /* NAV */
     nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:20px 48px; background:rgba(10,10,10,0.85); backdrop-filter:blur(12px); border-bottom:1px solid rgba(255,255,255,0.06); }
     .nav-logo { font-family:'Bebas Neue',sans-serif; font-size:28px; letter-spacing:2px; color:var(--white); text-decoration:none; }
     .nav-logo span { color:var(--red); }
     .nav-cta { background:var(--red); color:var(--white); font-family:'DM Mono',monospace; font-size:13px; font-weight:500; letter-spacing:1px; text-transform:uppercase; padding:10px 24px; border:none; cursor:pointer; transition:background 0.2s,transform 0.15s; }
     .nav-cta:hover { background:#ff3329; transform:translateY(-1px); }
-
-    /* HERO */
     .hero { min-height:100vh; display:flex; flex-direction:column; justify-content:center; padding:140px 48px 80px; position:relative; overflow:hidden; }
     .hero-bg { position:absolute; inset:0; background:radial-gradient(ellipse 60% 50% at 80% 50%,rgba(232,40,30,0.12) 0%,transparent 70%),radial-gradient(ellipse 40% 60% at 10% 80%,rgba(232,40,30,0.06) 0%,transparent 60%); }
     .hero-tag { font-family:'DM Mono',monospace; font-size:12px; letter-spacing:3px; text-transform:uppercase; color:var(--red); margin-bottom:24px; opacity:0; animation:fadeUp 0.6s ease forwards 0.2s; }
@@ -51,17 +46,15 @@
     .waitlist-note { font-size:12px; color:var(--gray-light); margin-top:14px; }
     .btn-tally { display:inline-block; background:var(--red); color:var(--white); font-family:'DM Mono',monospace; font-size:14px; font-weight:500; letter-spacing:1px; text-transform:uppercase; padding:16px 40px; border:none; cursor:pointer; transition:background 0.2s,transform 0.15s; }
     .btn-tally:hover { background:#ff3329; transform:translateY(-1px); }
-
-    /* SECTIONS */
     section { padding:100px 48px; }
     .section-tag { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--red); margin-bottom:16px; }
     .section-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(36px,6vw,80px); line-height:0.95; letter-spacing:1px; max-width:700px; }
-
-    /* PROBLEM */
     .problem { background:var(--gray); border-top:1px solid rgba(255,255,255,0.06); border-bottom:1px solid rgba(255,255,255,0.06); }
     .problem-grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; margin-top:60px; align-items:start; }
     .problem-statement { font-size:20px; font-weight:300; line-height:1.8; color:rgba(245,240,235,0.75); }
     .problem-statement strong { color:var(--white); font-weight:600; }
+    .problem-stat { background:rgba(232,40,30,0.08); border:1px solid rgba(232,40,30,0.2); padding:20px 24px; margin-top:28px; border-radius:4px; font-size:14px; color:rgba(245,240,235,0.8); line-height:1.7; }
+    .problem-stat strong { color:var(--accent); }
     .problem-math { background:var(--black); border:1px solid rgba(255,255,255,0.08); padding:36px; }
     .math-title { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--gray-light); margin-bottom:24px; }
     .math-row { display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px solid rgba(255,255,255,0.06); font-size:14px; }
@@ -70,8 +63,6 @@
     .math-row .value { font-family:'DM Mono',monospace; color:var(--white); }
     .math-row.highlight .value { color:var(--red); font-size:18px; }
     .math-row.highlight .label { color:var(--white); font-weight:500; }
-
-    /* HOW IT WORKS */
     .how-it-works { max-width:1100px; margin:0 auto; }
     .steps { margin-top:64px; display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:rgba(255,255,255,0.06); }
     .step { background:var(--black); padding:48px 36px; position:relative; overflow:hidden; transition:background 0.3s; }
@@ -82,8 +73,6 @@
     .step-icon { font-size:32px; margin-bottom:16px; }
     .step-title { font-family:'Bebas Neue',sans-serif; font-size:28px; letter-spacing:1px; margin-bottom:14px; }
     .step-desc { font-size:14px; color:var(--gray-light); line-height:1.7; }
-
-    /* DASHBOARD */
     .dashboard-section { background:var(--black); border-top:1px solid rgba(255,255,255,0.06); }
     .dashboard-intro { text-align:center; margin-bottom:48px; }
     .dashboard-intro .section-title { max-width:100%; margin:0 auto; }
@@ -167,7 +156,21 @@
     .toggle.on { background:var(--red); }
     .toggle-knob { position:absolute; top:3px; left:3px; width:16px; height:16px; border-radius:50%; background:var(--white); transition:transform 0.25s; box-shadow:0 1px 3px rgba(0,0,0,0.4); }
     .toggle.on .toggle-knob { transform:translateX(16px); }
-
+    /* COMPARISON TABLE */
+    .comparison { max-width:700px; margin:60px auto 0; }
+    .comparison-title { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--gray-light); margin-bottom:16px; text-align:center; }
+    .comp-table { width:100%; border-collapse:collapse; }
+    .comp-table th { padding:12px 20px; font-family:'DM Mono',monospace; font-size:11px; letter-spacing:1px; text-transform:uppercase; color:var(--gray-light); text-align:left; border-bottom:1px solid rgba(255,255,255,0.08); }
+    .comp-table th:not(:first-child) { text-align:center; }
+    .comp-table td { padding:12px 20px; font-size:13px; border-bottom:1px solid rgba(255,255,255,0.05); }
+    .comp-table td:not(:first-child) { text-align:center; font-family:'DM Mono',monospace; font-size:12px; }
+    .comp-table tr:last-child td { border-bottom:none; }
+    .comp-table .fg { color:#6bffb8; font-weight:600; }
+    .comp-table .bad { color:#f87171; }
+    .comp-table .row-label { color:rgba(245,240,235,0.7); }
+    .comp-table thead tr { background:#1a1a1a; }
+    .comp-table tbody tr:nth-child(even) { background:rgba(255,255,255,0.02); }
+    .comp-fg-head { color:var(--white); }
     /* PRICING */
     .pricing { max-width:1000px; margin:0 auto; }
     .pricing-sub { font-size:16px; color:rgba(245,240,235,0.55); margin-top:12px; }
@@ -196,8 +199,6 @@
     .plan.featured .plan-cta { background:var(--black); border-color:var(--black); }
     .plan.featured .plan-cta:hover { background:var(--gray); }
     .pricing-guarantee { text-align:center; margin-top:28px; font-size:13px; color:var(--gray-light); }
-
-    /* TESTIMONIALS */
     .testimonials { background:var(--gray); border-top:1px solid rgba(255,255,255,0.06); }
     .testimonial-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin-top:60px; background:rgba(255,255,255,0.06); }
     .testimonial { background:var(--black); padding:40px 32px; }
@@ -206,29 +207,21 @@
     .author-avatar { width:40px; height:40px; border-radius:50%; background:var(--red-dim); display:flex; align-items:center; justify-content:center; font-family:'Bebas Neue',sans-serif; font-size:18px; color:var(--white); flex-shrink:0; }
     .author-name { font-size:13px; font-weight:600; color:var(--white); }
     .author-title { font-size:12px; color:var(--gray-light); margin-top:2px; }
-
-    /* FINAL CTA */
     .final-cta { text-align:center; padding:120px 48px; position:relative; overflow:hidden; }
     .final-cta::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(232,40,30,0.15) 0%,transparent 70%); }
     .final-cta h2 { font-family:'Bebas Neue',sans-serif; font-size:clamp(44px,8vw,110px); line-height:0.92; letter-spacing:2px; position:relative; }
     .final-cta h2 em { font-style:normal; color:var(--red); display:block; }
     .final-cta p { font-size:17px; color:rgba(245,240,235,0.55); margin-top:24px; position:relative; }
     .final-cta-btn { margin-top:44px; position:relative; }
-
-    /* FOOTER */
     footer { padding:32px 48px; border-top:1px solid rgba(255,255,255,0.06); display:flex; justify-content:space-between; align-items:center; }
     .footer-logo { font-family:'Bebas Neue',sans-serif; font-size:22px; letter-spacing:2px; }
     .footer-logo span { color:var(--red); }
     .footer-copy { font-size:12px; color:var(--gray-light); }
     .footer-email { font-size:12px; color:var(--gray-light); text-decoration:none; }
     .footer-email:hover { color:var(--white); }
-
-    /* ANIMATIONS */
     @keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
     .reveal { opacity:0; transform:translateY(32px); transition:opacity 0.7s ease,transform 0.7s ease; }
     .reveal.visible { opacity:1; transform:translateY(0); }
-
-    /* RESPONSIVE */
     @media(max-width:768px){
       nav{padding:14px 20px} .nav-logo{font-size:22px}
       section{padding:64px 20px} .hero{padding:110px 20px 64px} .hero-sub{font-size:16px}
@@ -243,6 +236,7 @@
       .table-row>div:nth-child(5),.table-row>div:nth-child(6){display:none}
       .rules-grid{grid-template-columns:1fr}
       .final-cta{padding:80px 20px}
+      .comp-table td,.comp-table th{padding:10px 12px;font-size:11px}
     }
   </style>
 </head>
@@ -253,7 +247,6 @@
     <button class="nav-cta" data-tally-open="44vExr" data-tally-layout="modal" data-tally-emoji-text="&#x1F94A;" data-tally-emoji-animation="wave">Join Waitlist</button>
   </nav>
 
-  <!-- HERO -->
   <section class="hero">
     <div class="hero-bg"></div>
     <p class="hero-tag">AI Revenue Agent &middot; Combat Sports</p>
@@ -270,7 +263,6 @@
     </div>
   </section>
 
-  <!-- PROBLEM -->
   <section class="problem">
     <div class="reveal">
       <p class="section-tag">The Problem</p>
@@ -281,6 +273,9 @@
         A lead DMs your gym at 11PM on a Saturday. You're coaching. You see it Sunday morning. You mean to reply &#x2014; but training starts in 10 minutes.<br><br>
         By Monday, <strong>they've joined the gym down the street.</strong><br><br>
         This happens 20&#x2013;30 times a month. Every single month. You feel it but you can't see it. FightGrowth makes it visible &#x2014; and stops it from ever happening again.
+        <div class="problem-stat">
+          <strong>Even well-run gyms with full staff and CRM software admit they convert only ~50% of leads that come through Instagram or Facebook.</strong> FightGrowth captures every channel automatically &#x2014; no lead falls through regardless of where they found you.
+        </div>
       </div>
       <div class="problem-math">
         <div class="math-title">// Your Revenue Leak &#x2014; The Math</div>
@@ -294,7 +289,6 @@
     </div>
   </section>
 
-  <!-- HOW IT WORKS -->
   <section>
     <div class="how-it-works">
       <div class="reveal">
@@ -309,7 +303,6 @@
     </div>
   </section>
 
-  <!-- INTERACTIVE DASHBOARD -->
   <section class="dashboard-section">
     <div class="dashboard-intro reveal">
       <p class="section-tag">The Product</p>
@@ -341,8 +334,6 @@
           <div class="sidebar-user"><div class="user-avatar">T</div><div class="user-name">Taha &middot; Head Coach</div></div>
         </div>
         <div class="app-main">
-
-          <!-- HOME -->
           <div class="app-screen active" id="screen-home">
             <div class="screen-header"><div class="screen-title">Let's run the board.</div><div class="screen-sub">Review leads, spot ghosts, and close the loop.</div></div>
             <div class="metric-row metric-row-2">
@@ -359,8 +350,6 @@
               <div class="table-row"><div class="lead-name">Alex Rivera</div><div><span class="source-badge src-sms">SMS</span></div><div><span class="status-badge s-ghost">Ghost</span></div><div class="pipeline-val">$800</div><div class="last-contact">Mar 20, 6:00 AM</div><div class="next-action">Final re-engagement</div></div>
             </div>
           </div>
-
-          <!-- LEADS -->
           <div class="app-screen" id="screen-leads">
             <div class="screen-header"><div class="screen-title">Fight Card Dashboard</div><div class="screen-sub">All leads across every pipeline</div></div>
             <div class="metric-row metric-row-3">
@@ -379,8 +368,6 @@
               <div class="table-row"><div class="lead-name">Alex Rivera</div><div><span class="source-badge src-sms">SMS</span></div><div><span class="status-badge s-ghost">Ghost</span></div><div class="pipeline-val">$800</div><div class="last-contact">Mar 20</div><div class="next-action">Final re-engagement</div></div>
             </div>
           </div>
-
-          <!-- REVENUE -->
           <div class="app-screen" id="screen-revenue">
             <div class="screen-header"><div class="screen-title">Revenue Dashboard</div><div class="screen-sub">Agent-influenced revenue this month</div></div>
             <div class="metric-row metric-row-4">
@@ -401,8 +388,6 @@
               </div>
             </div>
           </div>
-
-          <!-- RULES -->
           <div class="app-screen" id="screen-rules">
             <div class="screen-header"><div class="screen-title">Rules of Engagement</div><div class="screen-sub">Set once. Agent runs forever within these boundaries.</div></div>
             <div class="rules-grid">
@@ -436,13 +421,11 @@
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </div>
   </section>
 
-  <!-- PRICING -->
   <section>
     <div class="pricing">
       <div class="reveal">
@@ -451,16 +434,38 @@
         <p class="pricing-sub">If this closes one extra member this month, it paid for itself. Everything else is profit.</p>
         <div class="founding-alert">
           <span class="founding-dot"></span>
-          <strong>Founding Member offer:</strong>&nbsp; First 50 gyms lock in $29/month forever &#x2014; <span id="spots-left">47 spots remaining.</span>
+          <strong>Founding Member offer:</strong>&nbsp; First 50 gyms lock in $49/month forever &#x2014; <span id="spots-left">47 spots remaining.</span>
         </div>
       </div>
+
+      <div class="comparison reveal">
+        <div class="comparison-title">// How we compare</div>
+        <table class="comp-table">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th class="comp-fg-head">FightGrowth</th>
+              <th>Go High Level</th>
+              <th>Market Muscles</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="row-label">Built for combat sports gyms</td><td class="fg">Yes</td><td class="bad">No</td><td class="fg">Yes</td></tr>
+            <tr><td class="row-label">Setup time</td><td class="fg">20 minutes</td><td class="bad">Weeks</td><td class="bad">Days</td></tr>
+            <tr><td class="row-label">Needs an agency</td><td class="fg">No</td><td class="bad">Usually</td><td class="bad">Sometimes</td></tr>
+            <tr><td class="row-label">AI that actually sends</td><td class="fg">Yes</td><td class="bad">Manual setup</td><td class="bad">Limited</td></tr>
+            <tr><td class="row-label">Starting price</td><td class="fg">$49/mo</td><td class="bad">$97/mo</td><td class="bad">$197/mo</td></tr>
+          </tbody>
+        </table>
+      </div>
+
       <div class="pricing-grid reveal">
         <div class="plan">
           <div class="plan-badge">&#x1F525; Founding Rate &middot; First 50 Only</div>
           <div class="plan-name">Founding Member</div>
-          <div class="plan-price"><sup>$</sup>29</div>
-          <div class="plan-period">per month &middot; or $290/year</div>
-          <div class="plan-strike">Regular price $49/mo after launch</div>
+          <div class="plan-price"><sup>$</sup>49</div>
+          <div class="plan-period">per month &middot; or $490/year</div>
+          <div class="plan-strike">Regular price $97/mo after launch</div>
           <ul class="plan-features">
             <li>Full autonomous agent &#x2014; actually sends</li>
             <li>All lead sources (IG, FB, SMS, web)</li>
@@ -475,8 +480,8 @@
         <div class="plan featured">
           <div class="plan-badge">Most Popular &middot; Solo Gym Owners</div>
           <div class="plan-name">Starter</div>
-          <div class="plan-price"><sup>$</sup>49</div>
-          <div class="plan-period">per month &middot; or $490/year (2 months free)</div>
+          <div class="plan-price"><sup>$</sup>97</div>
+          <div class="plan-period">per month &middot; or $970/year (2 months free)</div>
           <ul class="plan-features">
             <li>Full autonomous agent &#x2014; actually sends</li>
             <li>All lead sources (IG, FB, SMS, web)</li>
@@ -491,8 +496,8 @@
         <div class="plan">
           <div class="plan-badge">Gyms with Staff &middot; Multi-Location</div>
           <div class="plan-name">Pro</div>
-          <div class="plan-price"><sup>$</sup>97</div>
-          <div class="plan-period">per month &middot; or $970/year (2 months free)</div>
+          <div class="plan-price"><sup>$</sup>197</div>
+          <div class="plan-period">per month &middot; or $1,970/year (2 months free)</div>
           <ul class="plan-features">
             <li>Everything in Starter</li>
             <li>Up to 5 gym locations</li>
@@ -509,7 +514,6 @@
     </div>
   </section>
 
-  <!-- TESTIMONIALS -->
   <section class="testimonials">
     <div class="reveal"><p class="section-tag">Early Feedback</p><h2 class="section-title">WHAT GYM OWNERS ARE SAYING.</h2></div>
     <div class="testimonial-grid reveal">
@@ -528,7 +532,6 @@
     </div>
   </section>
 
-  <!-- FINAL CTA -->
   <section class="final-cta">
     <h2>STOP COACHING FOR FREE.<em>START CLOSING.</em></h2>
     <p>Join 200+ gym owners on the waitlist. First 50 get the founding rate &#x2014; locked forever.</p>
@@ -537,7 +540,6 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     <div class="footer-logo">FIGHT<span>GROWTH</span></div>
     <div class="footer-copy">&copy; 2026 FightGrowth. All rights reserved.</div>
@@ -545,14 +547,12 @@
   </footer>
 
   <script>
-    // Scroll reveal
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('visible'); });
     }, { threshold: 0.1 });
     reveals.forEach(el => observer.observe(el));
 
-    // Tab switching — syncs sidebar + mobile tabs
     function switchScreen(name, el) {
       document.querySelectorAll('.app-screen').forEach(s => s.classList.remove('active'));
       document.querySelectorAll('.sidebar-item, .tab-btn').forEach(s => s.classList.remove('active'));
@@ -563,7 +563,6 @@
       document.querySelectorAll('.tab-btn')[idx] && document.querySelectorAll('.tab-btn')[idx].classList.add('active');
     }
 
-    // Sliders
     function updateSlider(input, labelId, fmt) {
       const v = input.value;
       document.getElementById(labelId).textContent = fmt.replace('{v}', v);
@@ -575,7 +574,6 @@
       input.style.setProperty('--pct', pct);
     });
 
-    // Toggles
     function toggleSwitch(el) { el.classList.toggle('on'); }
   </script>
 </body>
