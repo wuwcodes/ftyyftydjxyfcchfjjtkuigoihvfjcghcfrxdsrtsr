@@ -30,6 +30,9 @@
     .nav-logo span { color:var(--red); }
     .nav-cta { background:var(--red); color:var(--white); font-family:'DM Mono',monospace; font-size:13px; font-weight:500; letter-spacing:1px; text-transform:uppercase; padding:10px 24px; border:none; cursor:pointer; transition:background 0.2s,transform 0.15s; }
     .nav-cta:hover { background:#ff3329; transform:translateY(-1px); }
+    .nav-calc { font-family:'DM Mono',monospace; font-size:12px; color:var(--gray-light); text-decoration:none; letter-spacing:1px; padding:10px 0; border-bottom:1px solid transparent; transition:all 0.2s; }
+    .nav-calc:hover { color:var(--white); border-bottom-color:var(--red); }
+    @media(max-width:768px){ .nav-calc { display:none; } }
     .hero { min-height:100vh; display:flex; flex-direction:column; justify-content:center; padding:140px 48px 80px; position:relative; overflow:hidden; }
     .hero-bg { position:absolute; inset:0; background:radial-gradient(ellipse 60% 50% at 80% 50%,rgba(232,40,30,0.12) 0%,transparent 70%),radial-gradient(ellipse 40% 60% at 10% 80%,rgba(232,40,30,0.06) 0%,transparent 60%); }
     .hero-tag { font-family:'DM Mono',monospace; font-size:12px; letter-spacing:3px; text-transform:uppercase; color:var(--red); margin-bottom:24px; opacity:0; animation:fadeUp 0.6s ease forwards 0.2s; }
@@ -63,6 +66,11 @@
     .math-row .value { font-family:'DM Mono',monospace; color:var(--white); }
     .math-row.highlight .value { color:var(--red); font-size:18px; }
     .math-row.highlight .label { color:var(--white); font-weight:500; }
+    .calc-link-wrap { margin-top:48px; text-align:center; }
+    .calc-link-btn { display:inline-flex; align-items:center; gap:12px; background:transparent; border:1px solid rgba(245,200,66,0.4); color:var(--accent); font-family:'DM Mono',monospace; font-size:13px; letter-spacing:1px; padding:16px 32px; text-decoration:none; transition:all 0.2s; }
+    .calc-link-btn:hover { background:rgba(245,200,66,0.08); border-color:var(--accent); transform:translateY(-2px); }
+    .calc-link-btn span { font-size:18px; }
+    .calc-link-note { font-size:12px; color:var(--gray-light); margin-top:10px; }
     .how-it-works { max-width:1100px; margin:0 auto; }
     .steps { margin-top:64px; display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:rgba(255,255,255,0.06); }
     .step { background:var(--black); padding:48px 36px; position:relative; overflow:hidden; transition:background 0.3s; }
@@ -243,7 +251,8 @@
 <body>
 
   <nav>
-    <a href="#" class="nav-logo">FIGHT<span>GROWTH</span></a>
+    <a href="/" class="nav-logo">FIGHT<span>GROWTH</span></a>
+    <a href="/calculator" class="nav-calc">&#x1F4CA; Revenue Calculator</a>
     <button class="nav-cta" data-tally-open="44vExr" data-tally-layout="modal" data-tally-emoji-text="&#x1F94A;" data-tally-emoji-animation="wave">Join Waitlist</button>
   </nav>
 
@@ -286,6 +295,13 @@
         <div class="math-row"><span class="label">At $150/month membership</span><span class="value">x $150</span></div>
         <div class="math-row highlight"><span class="label">Extra MRR per month</span><span class="value">+$2,700</span></div>
       </div>
+    </div>
+    <div class="calc-link-wrap reveal">
+      <a href="/calculator" class="calc-link-btn">
+        <span>&#x1F4CA;</span>
+        Calculate your gym's exact revenue gap &rarr;
+      </a>
+      <p class="calc-link-note">Free tool &middot; Takes 60 seconds &middot; No signup required</p>
     </div>
   </section>
 
