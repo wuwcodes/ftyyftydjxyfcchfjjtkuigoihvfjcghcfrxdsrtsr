@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AP Bio: Final Boss Cram</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=JetBrains+Mono:wght@400;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --bg-2: #11121a;
+    --ink: #f5f3e7;
+    --dim: #8a8a9c;
+    --acid: #d4ff3a;
+    --hot: #ff3d6e;
+    --cyan: #4fffd5;
+    --amber: #ffb53d;
+    --violet: #b87eff;
+    --line: rgba(245,243,231,0.12);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 15px;
+    line-height: 1.55;
+    overflow-x: hidden;
+    background-image:
+      radial-gradient(circle at 15% 10%, rgba(212,255,58,0.08), transparent 40%),
+      radial-gradient(circle at 85% 80%, rgba(255,61,110,0.08), transparent 40%),
+      radial-gradient(circle at 50% 50%, rgba(79,255,213,0.04), transparent 60%);
+  }
+  /* grain */
+  body::before {
+    content: "";
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence baseFrequency='0.9' numOctaves='2' seed='3'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/></svg>");
+    opacity: 0.06;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+    z-index: 1;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 24px 18px 120px; position: relative; z-index: 2; }
+
+  /* HERO */
+  .hero { padding: 32px 0 40px; border-bottom: 1px solid var(--line); margin-bottom: 32px; }
+  .kicker {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--acid);
+    margin-bottom: 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .kicker::before {
+    content: ""; width: 8px; height: 8px; background: var(--acid); border-radius: 50%;
+    animation: pulse 1.4s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1);} 50% { opacity: 0.4; transform: scale(0.7);} }
+  h1 {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-weight: 800;
+    font-size: clamp(40px, 9vw, 76px);
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin-bottom: 18px;
+  }
+  h1 .glow { color: var(--acid); }
+  h1 .ital { font-family: 'Instrument Serif', serif; font-style: italic; font-weight: 400; color: var(--hot); }
+  .hero p { color: var(--dim); font-size: 14px; max-width: 540px; }
+  .hero p strong { color: var(--ink); }
+  .stat-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+  .stat {
+    border: 1px solid var(--line);
+    padding: 10px 14px;
+    border-radius: 4px;
+    background: var(--bg-2);
+  }
+  .stat .v { color: var(--cyan); font-weight: 700; font-size: 16px; }
+  .stat .l { font-size: 10px; color: var(--dim); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 2px;}
+
+  /* SECTION */
+  section { margin-bottom: 48px; }
+  h2 {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+    display: flex; align-items: baseline; gap: 12px;
+  }
+  h2 .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--dim);
+    font-weight: 400;
+  }
+  .sub { color: var(--dim); font-size: 13px; margin-bottom: 22px; }
+
+  /* TIMELINE */
+  .timeline {
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 20px;
+    margin-bottom: 32px;
+  }
+  .timeline h3 {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 18px;
+    margin-bottom: 14px;
+    color: var(--amber);
+  }
+  .step { display: flex; gap: 14px; padding: 10px 0; border-bottom: 1px dashed var(--line); }
+  .step:last-child { border: none; }
+  .step .t {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--cyan); font-size: 12px; font-weight: 700;
+    min-width: 80px;
+    padding-top: 2px;
+  }
+  .step .d { font-size: 14px; }
+  .step .d strong { color: var(--acid); }
+
+  /* UNIT CARDS */
+  .units { display: flex; flex-direction: column; gap: 16px; }
+  .unit {
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 20px;
+    background: var(--bg-2);
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .unit:hover { border-color: var(--acid); transform: translateY(-2px); }
+  .unit.tier-s { border-left: 4px solid var(--hot); }
+  .unit.tier-a { border-left: 4px solid var(--amber); }
+  .unit.tier-b { border-left: 4px solid var(--cyan); }
+  .unit.tier-c { border-left: 4px solid var(--violet); }
+  .unit-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 14px; flex-wrap: wrap; }
+  .unit-title {
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+  }
+  .unit-title .tag { font-family: 'JetBrains Mono', monospace; font-weight: 400; font-size: 11px; color: var(--dim); display: block; margin-bottom: 2px;}
+  .badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    padding: 4px 8px;
+    border-radius: 3px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .badge.s { background: var(--hot); color: #fff; }
+  .badge.a { background: var(--amber); color: #000; }
+  .badge.b { background: var(--cyan); color: #000; }
+  .badge.c { background: var(--violet); color: #000; }
+  .weight { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--dim); margin-top: 4px; }
+
+  .key-points { margin: 12px 0; }
+  .key-points li { list-style: none; padding: 6px 0 6px 22px; position: relative; font-size: 13.5px; line-height: 1.5; }
+  .key-points li::before {
+    content: "▸"; position: absolute; left: 0; color: var(--acid); font-weight: 700;
+  }
+  .key-points li strong { color: var(--acid); }
+
+  .vid-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .vid {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(212,255,58,0.08);
+    border: 1px solid rgba(212,255,58,0.3);
+    color: var(--acid);
+    padding: 7px 12px;
+    border-radius: 3px;
+    text-decoration: none;
+    font-size: 11.5px;
+    font-weight: 700;
+    transition: all 0.15s;
+  }
+  .vid:hover { background: var(--acid); color: #000; }
+  .vid::before { content: "▶"; font-size: 9px; }
+  .vid.alt {
+    background: rgba(79,255,213,0.08);
+    border-color: rgba(79,255,213,0.3);
+    color: var(--cyan);
+  }
+  .vid.alt:hover { background: var(--cyan); color: #000; }
+  .vid.hot {
+    background: rgba(255,61,110,0.08);
+    border-color: rgba(255,61,110,0.3);
+    color: var(--hot);
+  }
+  .vid.hot:hover { background: var(--hot); color: #fff; }
+
+  /* TRAP BOX */
+  .trap {
+    margin-top: 14px;
+    padding: 10px 12px;
+    background: rgba(255,61,110,0.08);
+    border-left: 3px solid var(--hot);
+    font-size: 12.5px;
+    border-radius: 0 3px 3px 0;
+  }
+  .trap b { color: var(--hot); text-transform: uppercase; font-size: 10px; letter-spacing: 0.15em; display: block; margin-bottom: 4px;}
+
+  /* FORMULA STRIP */
+  .formulas { display: grid; grid-template-columns: 1fr; gap: 10px; }
+  @media (min-width: 600px) { .formulas { grid-template-columns: 1fr 1fr; } }
+  .f {
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 14px;
+  }
+  .f h4 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--cyan);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 6px;
+    font-weight: 700;
+  }
+  .f .eq {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--acid);
+    font-size: 14px;
+    margin: 4px 0 8px;
+    font-weight: 700;
+  }
+  .f p { font-size: 12.5px; color: var(--dim); }
+  .f p strong { color: var(--ink); }
+
+  /* QUICK REVIEW (flip on tap) */
+  .flip-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
+  @media (min-width: 600px) { .flip-grid { grid-template-columns: 1fr 1fr; } }
+  details {
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 12px 14px;
+    cursor: pointer;
+    transition: border-color 0.15s;
+  }
+  details:hover, details[open] { border-color: var(--acid); }
+  details summary {
+    list-style: none;
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  details summary::-webkit-details-marker { display: none; }
+  details summary::after {
+    content: "+"; color: var(--acid); font-size: 18px; font-weight: 800;
+    transition: transform 0.2s;
+  }
+  details[open] summary::after { transform: rotate(45deg); }
+  details .ans {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--line);
+    font-size: 13px;
+    color: var(--ink);
+  }
+  details .ans strong { color: var(--acid); }
+
+  /* FRQ */
+  .frq {
+    background: linear-gradient(135deg, rgba(184,126,255,0.06), rgba(79,255,213,0.04));
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 22px;
+  }
+  .frq ol { padding-left: 22px; }
+  .frq ol li { margin-bottom: 10px; font-size: 14px; }
+  .frq ol li strong { color: var(--violet); }
+
+  /* CHECKLIST */
+  .check {
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 22px;
+  }
+  .check label {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px dashed var(--line);
+    cursor: pointer;
+    font-size: 13.5px;
+  }
+  .check label:last-child { border: none; }
+  .check input[type=checkbox] {
+    appearance: none; -webkit-appearance: none;
+    width: 18px; height: 18px;
+    border: 1.5px solid var(--dim);
+    border-radius: 3px;
+    cursor: pointer;
+    position: relative;
+    flex-shrink: 0;
+    margin-top: 1px;
+    background: transparent;
+    transition: all 0.15s;
+  }
+  .check input[type=checkbox]:checked {
+    background: var(--acid);
+    border-color: var(--acid);
+  }
+  .check input[type=checkbox]:checked::after {
+    content: "✓";
+    position: absolute;
+    color: #000;
+    font-weight: 800;
+    font-size: 13px;
+    top: -2px; left: 3px;
+  }
+  .check input:checked + span { text-decoration: line-through; color: var(--dim); }
+
+  /* Footer */
+  footer {
+    border-top: 1px solid var(--line);
+    margin-top: 56px;
+    padding-top: 24px;
+    color: var(--dim);
+    font-size: 11px;
+    text-align: center;
+  }
+  footer .gn { color: var(--acid); font-weight: 700; }
+
+  /* Anchor nav pill */
+  .nav-pills {
+    display: flex; flex-wrap: wrap; gap: 6px;
+    margin-bottom: 24px;
+  }
+  .nav-pills a {
+    font-size: 10.5px;
+    text-decoration: none;
+    color: var(--ink);
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    padding: 6px 10px;
+    border-radius: 3px;
+    letter-spacing: 0.05em;
+  }
+  .nav-pills a:hover { background: var(--acid); color: #000; border-color: var(--acid); }
+
+  /* highlight strip */
+  mark { background: rgba(212,255,58,0.25); color: var(--acid); padding: 0 3px; border-radius: 2px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="kicker">T-MINUS ~24 HRS · MAY 4 · 8:00 AM</div>
+    <h1>AP <span class="ital">Bio</span><br><span class="glow">FINAL BOSS</span> CRAM.</h1>
+    <p>You said zero knowledge, can't sit still, exam tomorrow. So this isn't a textbook. It's a <strong>fight plan</strong>. Hit the ★★★ units first, watch one video, do the flip cards, move on. Don't try to learn everything — you can't. <strong>Goal: bank the easy points.</strong></p>
+    <div class="stat-row">
+      <div class="stat"><div class="v">3 hrs</div><div class="l">exam length</div></div>
+      <div class="stat"><div class="v">60 MCQ</div><div class="l">section 1 (50%)</div></div>
+      <div class="stat"><div class="v">6 FRQ</div><div class="l">section 2 (50%)</div></div>
+      <div class="stat"><div class="v">8 units</div><div class="l">unequal weight</div></div>
+    </div>
+  </header>
+
+  <nav class="nav-pills">
+    <a href="#plan">→ tonight's plan</a>
+    <a href="#units">→ unit by unit</a>
+    <a href="#formulas">→ formulas</a>
+    <a href="#flip">→ flip cards</a>
+    <a href="#frq">→ frq tactics</a>
+    <a href="#morning">→ morning of</a>
+  </nav>
+
+  <!-- TONIGHT'S PLAN -->
+  <section id="plan">
+    <h2>The Plan <span class="num">/ 01</span></h2>
+    <p class="sub">Don't open a textbook. Don't try to read 500 terms. Do these in order. If you only have 3 hours, stop at step 4.</p>
+    <div class="timeline">
+      <h3>★ TONIGHT (3–5 hrs total)</h3>
+      <div class="step">
+        <div class="t">0:00–0:50</div>
+        <div class="d"><strong>Watch the cram review.</strong> Bozeman's "Final Review" or Marco Learning's 2024 cram video. One pass. Don't pause to memorize — just let your brain see everything once.</div>
+      </div>
+      <div class="step">
+        <div class="t">0:50–1:30</div>
+        <div class="d"><strong>Hit the S-tier units below</strong> (Natural Selection, Cellular Energetics, Gene Expression). Read the bullets, watch ONE video per unit if needed. ~40% of the exam lives here.</div>
+      </div>
+      <div class="step">
+        <div class="t">1:30–2:00</div>
+        <div class="d"><strong>Memorize the formula strip</strong> (section 03). Hardy-Weinberg + chi-square + water potential = guaranteed FRQ points if they show up.</div>
+      </div>
+      <div class="step">
+        <div class="t">2:00–2:45</div>
+        <div class="d"><strong>Skim A-tier units</strong> (Cells, Heredity, Ecology). One video each from Amoeba Sisters if you blank.</div>
+      </div>
+      <div class="step">
+        <div class="t">2:45–3:15</div>
+        <div class="d"><strong>Flip cards section.</strong> Tap each one, force yourself to answer before opening it. This is your active recall.</div>
+      </div>
+      <div class="step">
+        <div class="t">3:15–3:30</div>
+        <div class="d"><strong>FRQ tactics page.</strong> Read the templates. Do NOT skip. This alone can save a letter grade.</div>
+      </div>
+      <div class="step">
+        <div class="t">SLEEP</div>
+        <div class="d"><strong>Hard cutoff. Sleep wins more points than 1 more hour of cramming.</strong> 7 hours minimum. Set 2 alarms.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- UNITS -->
+  <section id="units">
+    <h2>Unit Tier List <span class="num">/ 02</span></h2>
+    <p class="sub">Ranked by exam weight. <span style="color:var(--hot)">★★★ S-tier</span> = study FIRST. Together S+A units = ~75% of your score.</p>
+
+    <div class="units">
+
+      <!-- UNIT 7 - S TIER -->
+      <article class="unit tier-s">
+        <div class="unit-head">
+          <div>
+            <div class="unit-title"><span class="tag">UNIT 7 · NATURAL SELECTION</span>Evolution + Hardy-Weinberg</div>
+            <div class="weight">EXAM WEIGHT: 13–20% · highest single unit</div>
+          </div>
+          <span class="badge s">★★★ S-TIER</span>
+        </div>
+        <ul class="key-points">
+          <li><strong>Natural selection</strong> = differential survival/reproduction based on heritable traits. NOT "strongest survives" — best <em>fit for the environment</em>.</li>
+          <li><strong>Evidence for evolution:</strong> fossils, homologous structures (same origin, diff function — bat wing/whale flipper), vestigial structures, embryology, biogeography, molecular (DNA/protein similarity).</li>
+          <li><strong>5 ways evolution happens:</strong> natural selection, genetic drift (random, big effect in small pops), gene flow (migration), mutation, non-random mating.</li>
+          <li><strong>Hardy-Weinberg = NO EVOLUTION.</strong> Conditions: large pop, no mutation, no migration, no selection, random mating. If any one fails → evolution.</li>
+          <li><strong>Speciation:</strong> allopatric (geographic barrier), sympatric (same area, e.g. polyploidy in plants).</li>
+          <li><strong>Phylogenetic trees:</strong> shared branch points = common ancestor. Closer branches = more recent common ancestor. Don't read "across" the tips.</li>
+          <li><strong>Origin of life:</strong> RNA world hypothesis (RNA = info + catalyst), Miller-Urey (organic molecules from inorganic).</li>
+        </ul>
+        <div class="vid-row">
+          <a class="vid" href="https://www.youtube.com/watch?v=0SCjhI86grU" target="_blank">Amoeba: Natural Selection</a>
+          <a class="vid alt" href="https://www.youtube.com/watch?v=xPkOAnK20kw" target="_blank">Amoeba: Hardy-Weinberg</a>
+          <a class="vid hot" href="https://www.youtube.com/watch?v=BCspTvY1IBo" target="_blank">Bozeman: Natural Selection</a>
+        </div>
+        <div class="trap"><b>Common trap</b>Hardy-Weinberg: q² is the homozygous RECESSIVE frequency, not q. If 16% show recessive trait → q² = 0.16 → q = 0.4 → p = 0.6.</div>
+      </article>
+
+      <!-- UNIT 3 - S TIER -->
+      <article class="unit tier-s">
+        <div class="unit-head">
+          <div>
+            <div class="unit-title"><span class="tag">UNIT 3 · CELLULAR ENERGETICS</span>Photosynthesis + Respiration + Enzymes</div>
+            <div class="weight">EXAM WEIGHT: 12–16%</div>
+          </div>
+          <span class="badge s">★★★ S-TIER</span>
+        </div>
+        <ul class="key-points">
+          <li><strong>Enzymes</strong> lower activation energy. Specific to substrate (lock & key / induced fit). Affected by temp, pH, [substrate], inhibitors (competitive vs non-competitive/allosteric).</li>
+          <li><strong>Photosynthesis:</strong> 6CO₂ + 6H₂O + light → C₆H₁₂O₆ + 6O₂. Two stages:
+            <br>· <em>Light reactions</em> (thylakoid): water split, makes ATP + NADPH + O₂.
+            <br>· <em>Calvin cycle</em> (stroma): uses ATP + NADPH to fix CO₂ into G3P → glucose. NO LIGHT NEEDED directly.</li>
+          <li><strong>Cellular respiration</strong> (reverse): C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O + ATP. Stages:
+            <br>· <em>Glycolysis</em> (cytoplasm): glucose → 2 pyruvate, net 2 ATP. Anaerobic.
+            <br>· <em>Krebs/Citric Acid</em> (matrix): pyruvate → CO₂, makes NADH/FADH₂.
+            <br>· <em>ETC + chemiosmosis</em> (inner membrane): electrons drive H⁺ pumping → H⁺ flows back through ATP synthase → ~32 ATP. <em>O₂ is final electron acceptor.</em></li>
+          <li><strong>Fermentation</strong> = no O₂. Regenerates NAD⁺ so glycolysis continues. Lactic acid (animals) or ethanol+CO₂ (yeast).</li>
+          <li><strong>Chemiosmosis = the universal trick.</strong> Both photosynthesis and respiration use a proton gradient across a membrane to make ATP via ATP synthase.</li>
+        </ul>
+        <div class="vid-row">
+          <a class="vid" href="https://www.youtube.com/watch?v=eo5UfsAvVfU" target="_blank">Amoeba: Photosynthesis</a>
+          <a class="vid alt" href="https://www.youtube.com/watch?v=eJ7RZtnuKAY" target="_blank">Amoeba: Cell Respiration</a>
+          <a class="vid hot" href="https://www.youtube.com/watch?v=qIuRsM9HBHc" target="_blank">Amoeba: Enzymes</a>
+        </div>
+        <div class="trap"><b>Common trap</b>Photosynthesis ≠ "the opposite" of respiration in cells. PLANTS DO BOTH. They photosynthesize in light AND respire 24/7 in mitochondria.</div>
+      </article>
+
+      <!-- UNIT 6 - S TIER -->
+      <article class="unit tier-s">
+        <div class="unit-head">
+          <div>
+            <div class="unit-title"><span class="tag">UNIT 6 · GENE EXPRESSION & REGULATION</span>DNA → RNA → Protein</div>
+            <div class="weight">EXAM WEIGHT: 12–16%</div>
+          </div>
+          <span class="badge s">★★★ S-TIER</span>
+        </div>
+        <ul class="key-points">
+          <li><strong>Central dogma:</strong> DNA → (transcription) → mRNA → (translation) → protein.</li>
+          <li><strong>DNA replication:</strong> semiconservative. Helicase unwinds, primase lays RNA primer, DNA polymerase adds nucleotides 5'→3'. Leading strand continuous, lagging strand = Okazaki fragments. Ligase seals.</li>
+          <li><strong>Transcription</strong> (nucleus, eukaryotes): RNA polymerase reads DNA template → mRNA. Then mRNA processing: <em>5' cap, poly-A tail, splicing out introns</em> (keep exons).</li>
+          <li><strong>Translation</strong> (ribosome): mRNA codons read 3 at a time. tRNA brings amino acids (anticodon matches codon). Start: AUG (methionine). Stop codons: UAA, UAG, UGA.</li>
+          <li><strong>Mutations:</strong> point (silent / missense / nonsense), frameshift (insertion/deletion shifts reading frame — usually catastrophic).</li>
+          <li><strong>Gene regulation in bacteria:</strong> <em>lac operon</em> (inducible — ON when lactose present), <em>trp operon</em> (repressible — OFF when tryptophan abundant).</li>
+          <li><strong>Eukaryote regulation:</strong> transcription factors, enhancers, epigenetics (DNA methylation = silenced; histone acetylation = active).</li>
+          <li><strong>Biotech:</strong> PCR (amplifies DNA, cycles of denaturing/annealing/extending), gel electrophoresis (separates by size — small fragments travel farther), CRISPR (gene editing).</li>
+        </ul>
+        <div class="vid-row">
+          <a class="vid" href="https://www.youtube.com/watch?v=oefAI2x2CQM" target="_blank">Amoeba: DNA Replication</a>
+          <a class="vid alt" href="https://www.youtube.com/watch?v=oQwq8kAPbgY" target="_blank">Amoeba: Protein Synthesis</a>
+          <a class="vid hot" href="https://www.youtube.com/watch?v=oBwtxdI1zvk" target="_blank">Amoeba: Gene Regulation/Operon</a>
+        </div>
+        <div class="trap"><b>Common trap</b>"Codon" is on mRNA. "Anticodon" is on tRNA. They are COMPLEMENTARY (e.g., codon AUG ↔ anticodon UAC). Also: U replaces T in RNA.</div>
+      </article>
+
+      <!-- UNIT 2 - A TIER -->
+      <article class="unit tier-a">
+        <div class="unit-head">
+          <div>
+            <div class="unit-title"><span class="tag">UNIT 2 · CELL STRUCTURE & FUNCTION</span>Membranes + Transport</div>
+            <div class="weight">EXAM WEIGHT: 10–13%</div>
+          </div>
+          <span class="badge a">★★ A-TIER</span>
+        </div>
+        <ul class="key-points">
+          <li><strong>Plasma membrane</strong> = phospholipid bilayer (hydrophilic heads out, hydrophobic tails in) + proteins + cholesterol. <em>Fluid mosaic model.</em></li>
+          <li><strong>Passive transport</strong> (no ATP): diffusion, osmosis (water across membrane), facilitated diffusion (through channel/carrier protein).</li>
+          <li><strong>Active transport</strong> (uses ATP): pumps molecules against gradient. Sodium-potassium pump = classic. Endocytosis/exocytosis for big stuff.</li>
+          <li><strong>Tonicity:</strong> hypertonic (more solute outside) → water leaves cell → shrivels. Hypotonic → water enters → swells/lyses. Isotonic → no net.</li>
+          <li><strong>Surface area : volume</strong> — small cells win. As cell grows, volume outpaces SA → can't get nutrients in/waste out. Why cells stay small.</li>
+          <li><strong>Organelles to know:</strong> nucleus (DNA), mitochondria (ATP, double membrane), chloroplast (photosynthesis, double membrane), ER (rough = ribosomes/protein, smooth = lipids), Golgi (modify/ship), lysosome (digest), ribosome (translate).</li>
+          <li><strong>Endosymbiotic theory:</strong> mitochondria & chloroplasts were once free-living prokaryotes. Evidence: own DNA, own ribosomes, double membrane, divide independently.</li>
+        </ul>
+        <div class="vid-row">
+          <a class="vid" href="https://www.youtube.com/watch?v=Hmwvj9X4GNY" target="_blank">Amoeba: Cell Transport</a>
+          <a class="vid alt" href="https://www.youtube.com/watch?v=URUJD5NEXC8" target="_blank">Amoeba: Osmosis</a>
+        </div>
+        <div class="trap"><b>Common trap</b>Water moves toward higher solute / lower water potential. Memorize: "salty side sucks." Water always chases the salt.</div>
+      </article>
+
+      <!-- UNIT 5 - A TIER -->
+      <article class="unit tier-a">
+        <div class="unit-head">
+          <div>
+            <div class="unit-title"><span class="tag">UNIT 5 · HEREDITY</span>Mendel + Punnett + Pedigrees</div>
+            <div class="weight">EXAM WEIGHT: 8–11%</div>
+          </div>
+          <span class="badge a">★★ A-TIER</span>
+        </div>
+        <ul class="key-points">
+          <li><strong>Mitosis</strong> = body cells, 2 identical diploid daughters (2n→2n). For growth/repair.</li>
+          <li><strong>Meiosis</strong> = gametes, 4 unique haploid daughters (2n→n). Two divisions. Source of genetic variation: <em>crossing over</em> (prophase I), <em>independent assortment</em> (metaphase I), <em>random fertilization</em>.</li>
+          <li><strong>Mendel's laws:</strong> segregation (alleles separate in gametes), independent assortment (genes on different chromosomes inherited independently).</li>
+          <li><strong>Punnett basics:</strong> Aa × Aa → 1 AA : 2 Aa : 1 aa = 3:1 phenotype if A is dominant.</li>
+          <li><strong>Non-Mendelian:</strong> incomplete dominance (red × white = pink), codominance (both shown, AB blood), multiple alleles (ABO blood: I^A, I^B, i), polygenic (height/skin), pleiotropy (one gene, many effects).</li>
+          <li><strong>Sex-linked (X-linked recessive):</strong> males more affected (only one X). Color blindness, hemophilia.</li>
+          <li><strong>Pedigree shortcut:</strong> two unaffected parents with affected kid → recessive. Affected parent every generation → dominant. Mostly males affected, skips generations → X-linked recessive.</li>
+          <li><strong>Chi-square (χ²)</strong> tests if observed ratios match expected. If χ² > critical value → reject null → ratios don't match.</li>
+        </ul>
+        <div class="vid-row">
+          <a class="vid" href="https://www.youtube.com/watch?v=f-ldPgEfAHI" target="_blank">Amoeba: Mitosis</a>
+          <a class="vid alt" href="https://www.youtube.com/watch?v=VzDMG7ke69g" target="_blank">Amoeba: Meiosis</a>
+          <a class="vid hot" href="https://www.youtube.com/watch?v=prkHKjfUmMs" target="_blank">Amoeba: Punnett Squares</a>
+        </div>
+        <div class="trap"><b>Common trap</b>Mitosis vs Meiosis: mitosis has ONE division, meiosis has TWO. Crossing over only happens in meiosis I.</div>
+      </article>
+
+      <!-- UNIT 8 - A TIER -->
+      <article class="unit tier-a">
+        <div class="unit-head">
+          <div>
+            <div class="unit-title"><span class="tag">UNIT 8 · ECOLOGY</span>Populations + Energy + Ecosystems</div>
+            <div class="weight">EXAM WEIGHT: 10–15%</div>
+          </div>
+          <span class="badge a">★★ A-TIER</span>
+        </div>
+        <ul class="key-points">
+          <li><strong>Trophic levels:</strong> producers → primary consumers → secondary → tertiary. Only ~10% of energy passes up each level (rest lost as heat). That's why food chains are short.</li>
+          <li><strong>Population growth:</strong>
+            <br>· <em>Exponential (J-curve)</em>: unlimited resources, dN/dt = rN.
+            <br>· <em>Logistic (S-curve)</em>: hits carrying capacity K. dN/dt = rN(K−N)/K.</li>
+          <li><strong>r vs K-selected:</strong> r = many offspring, little care (insects, fish). K = few offspring, lots of care (humans, elephants).</li>
+          <li><strong>Symbiosis:</strong> mutualism (++), commensalism (+0), parasitism (+−), predation (+−), competition (−−).</li>
+          <li><strong>Biogeochemical cycles:</strong> carbon (photosynthesis ↔ respiration ↔ combustion), nitrogen (N₂ → NH₃ by bacteria — fixation), water, phosphorus (no atmospheric phase).</li>
+          <li><strong>Biodiversity</strong> = stability. Higher diversity → ecosystem resists disturbance. Simpson's Diversity Index measures it.</li>
+          <li><strong>Human impact:</strong> climate change, invasive species, habitat destruction, eutrophication (excess nutrients → algal bloom → dead zones).</li>
+        </ul>
+        <div class="vid-row">
+          <a class="vid" href="https://www.youtube.com/watch?v=v3GETRn3jXA" target="_blank">Amoeba: Food Webs/Energy</a>
+          <a class="vid alt" href="https://www.youtube.com/watch?v=RBOsqmBQBQk" target="_blank">Amoeba: Ecological Relationships</a>
+          <a class="vid hot" href="https://www.youtube.com/watch?v=EvPgcrDvskQ" target="_blank">Amoeba: Carbon/Nitrogen Cycles</a>
+        </div>
+      </article>
+
+      <!-- UNIT 4 - B TIER -->
+      <article class="unit tier-b">
+        <div class="unit-head">
+          <div>
+            <div class="unit-title"><span class="tag">UNIT 4 · CELL COMMUNICATION & CELL CYCLE</span>Signaling + Mitosis Regulation</div>
+            <div class="weight">EXAM WEIGHT: 10–15%</div>
+          </div>
+          <span class="badge b">★ B-TIER</span>
+        </div>
+        <ul class="key-points">
+          <li><strong>Signal transduction = 3 steps:</strong> RECEPTION (signal binds receptor) → TRANSDUCTION (relay, often phosphorylation cascade) → RESPONSE (gene expression / protein activity).</li>
+          <li><strong>Receptor types:</strong> G-protein coupled, receptor tyrosine kinase, ligand-gated ion channel, intracellular (for steroids — they cross membrane).</li>
+          <li><strong>Feedback:</strong> negative (most common — output reduces input, e.g. body temp, blood sugar). Positive (amplifies — childbirth oxytocin, blood clotting).</li>
+          <li><strong>Cell cycle:</strong> G1 → S (DNA replicated) → G2 → M. Checkpoints at G1, G2, M ensure DNA isn't damaged before proceeding.</li>
+          <li><strong>Cancer</strong> = loss of cell cycle control. Mutations in proto-oncogenes (gas pedal) or tumor suppressors like p53 (brakes).</li>
+          <li><strong>Apoptosis</strong> = programmed cell death. Removes damaged or unneeded cells (e.g., webbing between fingers in development).</li>
+        </ul>
+        <div class="vid-row">
+          <a class="vid" href="https://www.youtube.com/watch?v=qRjQv6c2cSE" target="_blank">Amoeba: Cell Signaling</a>
+          <a class="vid alt" href="https://www.youtube.com/watch?v=Wy3N5NCZBHA" target="_blank">Amoeba: Cell Cycle</a>
+        </div>
+      </article>
+
+      <!-- UNIT 1 - C TIER -->
+      <article class="unit tier-c">
+        <div class="unit-head">
+          <div>
+            <div class="unit-title"><span class="tag">UNIT 1 · CHEMISTRY OF LIFE</span>Water + Macromolecules</div>
+            <div class="weight">EXAM WEIGHT: 8–11%</div>
+          </div>
+          <span class="badge c">SKIM</span>
+        </div>
+        <ul class="key-points">
+          <li><strong>Water properties</strong> (all from polarity / hydrogen bonding): cohesion (water-water), adhesion (water-other), high specific heat, high heat of vaporization, less dense as solid (ice floats), universal solvent.</li>
+          <li><strong>4 macromolecules:</strong>
+            <br>· <em>Carbs</em> (energy/structure): monomer = monosaccharide (glucose). Polymers = starch, glycogen, cellulose.
+            <br>· <em>Lipids</em> (energy/membranes): NOT polymers. Triglycerides (saturated/unsaturated), phospholipids, steroids.
+            <br>· <em>Proteins</em> (everything): monomer = amino acid. Peptide bonds. 4 levels of structure (1° sequence → 2° helix/sheet → 3° 3D fold → 4° multiple subunits).
+            <br>· <em>Nucleic acids</em>: monomer = nucleotide (sugar + phosphate + base). DNA = double helix, deoxyribose, ATCG. RNA = single, ribose, AUCG.</li>
+          <li><strong>Dehydration synthesis</strong> = builds polymers (releases H₂O). <strong>Hydrolysis</strong> = breaks polymers (adds H₂O).</li>
+          <li><strong>Protein denaturation:</strong> high temp / extreme pH disrupts H-bonds → loss of 3D shape → loss of function.</li>
+        </ul>
+        <div class="vid-row">
+          <a class="vid" href="https://www.youtube.com/watch?v=YO244P1e9QM" target="_blank">Amoeba: Biomolecules</a>
+          <a class="vid alt" href="https://www.youtube.com/watch?v=y31DlJ6uGgE" target="_blank">Bozeman: Water</a>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- FORMULAS -->
+  <section id="formulas">
+    <h2>Formula Strip <span class="num">/ 03</span></h2>
+    <p class="sub">You GET a formula sheet on exam day. But you have to know <em>when</em> to use each one. These are the high-frequency ones.</p>
+    <div class="formulas">
+      <div class="f">
+        <h4>Hardy-Weinberg</h4>
+        <div class="eq">p² + 2pq + q² = 1</div>
+        <div class="eq">p + q = 1</div>
+        <p>p = dominant allele freq, q = recessive. <strong>q² = % showing recessive trait.</strong> 2pq = heterozygous freq.</p>
+      </div>
+      <div class="f">
+        <h4>Chi-Square (χ²)</h4>
+        <div class="eq">χ² = Σ (O − E)² / E</div>
+        <p>Tests if your observed data matches expected. Compare to critical value at df = categories − 1, p = 0.05. <strong>If χ² &gt; critical → reject null.</strong></p>
+      </div>
+      <div class="f">
+        <h4>Water Potential</h4>
+        <div class="eq">Ψ = Ψp + Ψs</div>
+        <div class="eq">Ψs = −iCRT</div>
+        <p>Water moves from <strong>high Ψ to low Ψ</strong>. In open container, Ψp = 0, so Ψ = Ψs. i = ions (sucrose = 1, NaCl = 2).</p>
+      </div>
+      <div class="f">
+        <h4>Population Growth</h4>
+        <div class="eq">Exponential: dN/dt = rN</div>
+        <div class="eq">Logistic: dN/dt = rN(K−N)/K</div>
+        <p>K = carrying capacity. When N = K, growth = 0 (logistic). r = max growth rate.</p>
+      </div>
+      <div class="f">
+        <h4>Simpson's Diversity</h4>
+        <div class="eq">D = 1 − Σ(n/N)²</div>
+        <p>n = # of one species, N = total. <strong>Higher D = more diverse.</strong></p>
+      </div>
+      <div class="f">
+        <h4>Surface Area : Volume</h4>
+        <div class="eq">Sphere: SA = 4πr², V = (4/3)πr³</div>
+        <p>As r grows, V grows faster than SA. <strong>Small cells = high SA:V ratio = better exchange.</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLIP CARDS -->
+  <section id="flip">
+    <h2>Active Recall Flip Cards <span class="num">/ 04</span></h2>
+    <p class="sub">Tap each card. Try to answer BEFORE opening it. This is the highest-leverage thing you can do tonight.</p>
+    <div class="flip-grid">
+      <details><summary>Q: Difference between mitosis and meiosis?</summary>
+        <div class="ans">Mitosis: 1 division → 2 identical diploid (2n) cells, for growth/repair. Meiosis: 2 divisions → 4 unique haploid (n) gametes, with crossing over + independent assortment for variation.</div></details>
+      <details><summary>Q: What does ATP synthase actually do?</summary>
+        <div class="ans">It's a protein channel that lets H⁺ ions flow DOWN their gradient across a membrane. The flow physically spins it, and that spinning catalyzes ADP + Pi → <strong>ATP</strong>. Used in both mitochondria (respiration) and chloroplasts (photosynthesis).</div></details>
+      <details><summary>Q: A population has q² = 0.36. What's p?</summary>
+        <div class="ans">q = √0.36 = <strong>0.6</strong>. So p = 1 − 0.6 = <strong>0.4</strong>. Heterozygous frequency = 2pq = 2(0.4)(0.6) = 0.48.</div></details>
+      <details><summary>Q: Why is the lagging strand "lagging"?</summary>
+        <div class="ans">DNA polymerase only adds nucleotides 5'→3'. The lagging strand template runs the wrong way, so synthesis happens in short <strong>Okazaki fragments</strong>, away from the replication fork. Ligase glues them together later.</div></details>
+      <details><summary>Q: What's the final electron acceptor in cellular respiration? Photosynthesis?</summary>
+        <div class="ans">Respiration: <strong>O₂</strong> (becomes water). Photosynthesis: <strong>NADP⁺</strong> (becomes NADPH).</div></details>
+      <details><summary>Q: Cell placed in hypertonic solution — what happens?</summary>
+        <div class="ans">Solution has more solute outside. Water rushes OUT of cell → cell shrivels (animal) or plasmolyzes (plant). Remember: "salty side sucks."</div></details>
+      <details><summary>Q: How do you know if a trait is X-linked recessive from a pedigree?</summary>
+        <div class="ans">Mostly males affected, skips generations, can pass from carrier mother to son. Affected females must have affected father AND carrier/affected mother.</div></details>
+      <details><summary>Q: 3 ways prokaryotes regulate genes via the operon model?</summary>
+        <div class="ans">(1) Inducible operon (lac) — normally OFF, turns ON when substrate present. (2) Repressible operon (trp) — normally ON, turns OFF when product abundant. (3) Repressors and activators bind operator/promoter regions.</div></details>
+      <details><summary>Q: Why are food chains rarely longer than 4–5 levels?</summary>
+        <div class="ans">Only ~10% of energy transfers up each trophic level (rest lost as heat). After 4–5 levels, there's not enough energy left to support another consumer.</div></details>
+      <details><summary>Q: 3 evidences mitochondria came from prokaryotes?</summary>
+        <div class="ans">(1) Own circular DNA. (2) Own 70S ribosomes (like bacteria). (3) Double membrane. (4) Divide by binary fission. <strong>Endosymbiotic theory.</strong></div></details>
+      <details><summary>Q: What does p53 do, and what happens if it mutates?</summary>
+        <div class="ans">p53 is a tumor suppressor — it halts the cell cycle when DNA is damaged, triggers repair, or signals apoptosis. If mutated, damaged cells divide unchecked → cancer.</div></details>
+      <details><summary>Q: Negative vs positive feedback — give an example of each.</summary>
+        <div class="ans">Negative: response REDUCES the stimulus (body temperature, blood glucose via insulin/glucagon). Positive: response AMPLIFIES the stimulus (childbirth oxytocin, blood clotting).</div></details>
+    </div>
+  </section>
+
+  <!-- FRQ TACTICS -->
+  <section id="frq">
+    <h2>FRQ Tactics <span class="num">/ 05</span></h2>
+    <p class="sub">FRQs are 50% of your score. Most students lose points not from being wrong but from being <em>vague</em>. Here's how AP Readers actually grade.</p>
+    <div class="frq">
+      <ol>
+        <li><strong>READ THE COMMAND VERB.</strong> "Describe" = list features. "Explain" = give mechanism + cause/effect. "Justify" = use data as evidence. "Predict" = give an outcome AND why. Wrong verb = no points.</li>
+        <li><strong>Answer in the same language as the question.</strong> If the question says "natural selection," your answer should literally say "natural selection." Don't dance around terms.</li>
+        <li><strong>Always connect structure → function.</strong> "Cristae increase surface area, which holds more ETC proteins, which makes more ATP." That's 3 points instead of 1.</li>
+        <li><strong>For experimental design FRQs:</strong> identify <em>independent variable</em>, <em>dependent variable</em>, a <em>control group</em>, and <em>at least one variable held constant</em>. Then state your hypothesis in "if/then" form.</li>
+        <li><strong>For graph FRQs:</strong> label both axes WITH UNITS. Title it. Use the right type (bar = categories, line = continuous). Plot data points clearly.</li>
+        <li><strong>For data analysis:</strong> first describe the trend ("as X increases, Y also increases"). Then explain WHY biologically. Then connect to a bigger concept.</li>
+        <li><strong>If you don't know an answer:</strong> still write something. Use vocabulary from the question. Partial credit exists. Blank = guaranteed zero.</li>
+        <li><strong>Time:</strong> 90 min for 6 FRQs. ~15 min each. The 2 long FRQs are worth more (8–10 pts) than the 4 short ones (4 pts). Plan accordingly.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- MORNING OF -->
+  <section id="morning">
+    <h2>Morning Of / Exam Day <span class="num">/ 06</span></h2>
+    <p class="sub">Tap to check off as you go.</p>
+    <div class="check">
+      <label><input type="checkbox"><span><strong>Eat real food.</strong> Protein + complex carbs. Not just coffee. Brain runs on glucose.</span></label>
+      <label><input type="checkbox"><span><strong>Bring:</strong> Pencils (No. 2), pens (black/dark blue for FRQs), school-issued device fully charged, photo ID, College Board ID, water, snack.</span></label>
+      <label><input type="checkbox"><span><strong>NO smartwatch, no phone</strong> in testing room. Any approved 4-function/scientific/graphing calculator is allowed.</span></label>
+      <label><input type="checkbox"><span><strong>Section 1 (90 min, 60 MCQs):</strong> ~90 sec per question. If stuck &gt;60 sec, flag it and move on. Come back at the end.</span></label>
+      <label><input type="checkbox"><span><strong>Use the formula sheet.</strong> It's at the front of both sections — flip to it for any math question.</span></label>
+      <label><input type="checkbox"><span><strong>NEVER leave MCQs blank.</strong> No guessing penalty. Eliminate 2 obviously wrong answers, then guess between the rest.</span></label>
+      <label><input type="checkbox"><span><strong>Section 2 (90 min, 6 FRQs):</strong> Skim all 6 first. Start with the EASIEST one to bank points + build confidence.</span></label>
+      <label><input type="checkbox"><span><strong>Write legibly</strong> for FRQs (handwritten on paper). Underline key terms. Use full sentences. Don't write outside the box.</span></label>
+      <label><input type="checkbox"><span><strong>If you finish early</strong> — go back. Re-read every FRQ answer. You will catch at least one mistake.</span></label>
+      <label><input type="checkbox"><span><strong>Breathe.</strong> A 3 is a passing score. A 4 gets you college credit at most schools. You don't need a 5. <strong>You just need to show up and try.</strong></span></label>
+    </div>
+  </section>
+
+  <footer>
+    <div class="gn">GO GET YOUR POINTS, TAHA. ✦</div>
+    <div style="margin-top:8px">Built fast. No textbook. Just signal. — May 4 · 8 AM · You got this.</div>
+  </footer>
+
+</div>
+</body>
+</html>
